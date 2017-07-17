@@ -1,0 +1,83 @@
+---
+layout: default
+title: Using tooltip to show message
+permalink: /examples/using-tooltip-to-show-message/
+image: /examples/using-tooltip-to-show-message/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Using tooltip to show message</h1>
+        <p>&larr; <a href="/examples">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>FormValidation allows to use tooltip to show message via the <a href="/settings#form-err-container">err.container</a> option.</p>
+                <p>It uses the built-in tooltip component provided by frameworks:</p>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Framework</th>
+                                <th>
+{% highlight javascript %}
+err: {
+    container: 'tooltip'
+}
+{% endhighlight %}
+                                </th>
+                                <th>
+{% highlight javascript %}
+err: {
+    container: 'popover'
+}
+{% endhighlight %}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Bootstrap</td>
+                                <td><a href="http://getbootstrap.com/javascript/#tooltips">Bootstrap's tooltip</a></td>
+                                <td><a href="http://getbootstrap.com/javascript/#popovers">Bootstrap's popover</a></td>
+                            </tr>
+                            <tr>
+                                <td>Foundation</td>
+                                <td colspan="2"><a href="http://foundation.zurb.com/docs/components/tooltips.html">Foundation's tooltip</a></td>
+                            </tr>
+                            <tr>
+                                <td>Semantic</td>
+                                <td colspan="2"><a href="http://semantic-ui.com/modules/popup.html">Semantic's popup</a></td>
+                            </tr>
+                            <tr>
+                                <td>UIKit</td>
+                                <td colspan="2"><a href="http://getuikit.com/docs/tooltip.html">UIKit's tooltip</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p>Since the <a href="http://purecss.io/">Pure</a> framework doesn't have tooltip and popover components,
+                    it's not possible to place message inside tooltip when using Pure.</p>
+
+                <div class="doc-alert doc-alert-info">
+                    Due to the limitation of tooltip height element, it shows only one message even in the case the field doesn't pass multiple validators at the same time
+                </div>
+
+                {% include demo/tabs.html id="tooltip" frameworks="bootstrap,foundation,semantic,uikit" dir="tooltip" codes="programmatic" %}
+
+                <p>It's also possible to mix showing message in tooltip and usual area by setting <a href="/settings#field-err">err</a> option to particular field:</p>
+
+                {% include demo/tabs.html id="mix" frameworks="bootstrap,foundation,semantic,uikit" dir="mix" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

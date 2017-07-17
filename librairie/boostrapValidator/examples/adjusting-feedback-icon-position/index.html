@@ -1,0 +1,53 @@
+---
+layout: default
+title: Adjusting feedback icon position
+permalink: /examples/adjusting-feedback-icon-position/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Adjusting feedback icon position</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>In some cases, the <a href="/settings#form-icon">feedback icons</a> aren't shown properly. By default, Bootstrap defines feedback icon position as following:</p>
+
+{% highlight css %}
+.has-feedback .form-control-feedback {
+    top: 25px;
+    right: 0;
+}
+.form-horizontal .has-feedback .form-control-feedback {
+    top: 0;
+    right: 15px;
+}
+{% endhighlight %}
+
+                <p>By customizing the value of <code>top</code> and <code>right</code> properties, you can adjust the feedback icon to deserved position.</p>
+                <p>Below is some popular usages.</p>
+
+                <section>
+                    <h3>Button group</h3>
+
+                    {% include demo/tabs.html id="button-group" frameworks="bootstrap" dir="button-group" codes="programmatic" %}
+                </section>
+
+                <section>
+                    <h3>Input group</h3>
+
+                    {% include demo/tabs.html id="input-group" frameworks="bootstrap" dir="input-group" codes="programmatic" %}
+                </section>
+
+                <p>If changing the css positioning of the feedback icon isn't enough, you might have to look at the <a href="/examples/showing-icon-custom-area/">Showing icons in custom area</a> example.</p>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

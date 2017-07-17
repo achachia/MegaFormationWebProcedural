@@ -1,0 +1,9 @@
+.badge {
+    background-color: #E81313;
+}
+
+
+
+.navbar-brand {
+    padding: 10px 15px !important; /*53 pour centrer sur la largueur de la colonne */
+}

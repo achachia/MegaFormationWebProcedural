@@ -1,0 +1,159 @@
+<style type="text/css">
+/**
+ * Adjust feedback icon position.
+ * See the following example for more information:
+ * http://formvalidation.io/examples/adjusting-feedback-icon-position/
+ */
+#employmentForm .inputGroupContainer .form-control-feedback,
+#employmentForm .selectContainer .form-control-feedback {
+    right: -15px;
+}
+</style>
+
+<form id="employmentForm" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-4 control-label">Position</label>
+        <div class="col-xs-4 selectContainer">
+            <select name="position" class="col-xs-4 form-control">
+                <option value=""></option>
+                <option value="designer">Designer</option>
+                <option value="developer">Developer</option>
+                <option value="leader">Leader</option>
+                <option value="tester">Tester</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-4 control-label">Start date</label>
+        <div class="col-xs-4">
+            <input class="form-control" name="startDate" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-4 control-label">Portfolio website</label>
+        <div class="col-xs-6">
+            <input class="form-control" name="website" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-4 control-label">Salary requirements</label>
+        <div class="col-xs-3 inputGroupContainer">
+            <div class="input-group">
+                <input type="text" class="form-control" name="salary" />
+                <span class="input-group-addon">$</span>
+            </div>
+        </div>
+    </div>
+
+    <hr/>
+
+    <div class="form-group">
+        <label class="col-xs-4 control-label">Full name</label>
+        <div class="col-xs-5">
+            <input class="form-control" name="fullName" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-4 control-label">Email address</label>
+        <div class="col-xs-5">
+            <input class="form-control" name="email" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-4 control-label">Phone number</label>
+        <div class="col-xs-3">
+            <input class="form-control" name="phone" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-8 col-xs-offset-4">
+            <button type="submit" id="validateButton" class="btn btn-default">Validate and Submit</button>
+            <button type="submit" id="skipButton" class="btn btn-default">Skip validation</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#employmentForm').formValidation({
+        framework: 'bootstrap',
+        button: {
+            selector: '#validateButton',
+            disabled: 'disabled'
+        },
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            position: {
+                validators: {
+                    notEmpty: {
+                        message: 'The position is required'
+                    }
+                }
+            },
+            startDate: {
+                validators: {
+                    notEmpty: {
+                        message: 'The start date is required'
+                    },
+                    date: {
+                        message: 'Please enter a valid date',
+                        format: 'YYYY/MM/DD'
+                    }
+                }
+            },
+            website: {
+                validators: {
+                    uri: {
+                        message: 'The website address is not valid'
+                    }
+                }
+            },
+            salary: {
+                validators: {
+                    notEmpty: {
+                        message: 'The salary is required'
+                    }
+                }
+            },
+            fullName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The full name is required'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The email address is not valid'
+                    }
+                }
+            },
+            phone: {
+                validators: {
+                    notEmpty: {
+                        message: 'The phone number is required'
+                    },
+                    phone: {
+                        country: 'US',
+                        message: 'Please enter a valid US phone number'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

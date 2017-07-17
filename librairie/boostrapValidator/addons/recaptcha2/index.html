@@ -1,0 +1,238 @@
+---
+layout: default
+title: reCaptcha2 add-on
+permalink: /addons/recaptcha2/
+image: /addons/recaptcha2/cover.png
+file: "recaptcha2-v0.3.0.zip"
+download: "https://github.com/formvalidation/addon-recaptcha/releases/download/v0.3.0/recaptcha2-v0.3.0.zip"
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>reCaptcha2 add-on</h1>
+        <p>Add and validate Google reCAPTCHA v2</p>
+        <p>&larr; <a href="/addons/">Add-ons</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>This add-on adds and validates Google reCAPTCHA v2 element.</p>
+
+                <div class="doc-alert doc-alert-warning">
+                    If you still want to use Google reCAPTCHA v1, you can use the <a href="/addons/recaptcha1/">recaptcha1</a> add-on
+                </div>
+
+                <p>Follow these steps to use this add-on:</p>
+
+                <section>
+                    <h2>Registering keys</h2>
+                    <p>You need to register a site and secret keys at <a href="https://www.google.com/recaptcha/admin">https://www.google.com/recaptcha/admin</a></p>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Including the add-on</h2>
+                    <ul class="doc-list">
+                        <li>Download <a href="{{ page.download }}" class="addonDownloadButton" data-placement="bottom" data-container="body">reCaptcha2</a> add-on</li>
+                        <li>Include <code>reCaptcha2.min.js</code> (located in the <code>dist</code> directory) to your page. Ensure that it's placed after <code>formValidation(.min).js</code></li>
+                    </ul>
+{% highlight html %}
+<!-- FormValidation plugin -->
+<script src="/vendor/formvalidation/dist/js/formValidation.min.js"></script>
+
+<!-- Add-ons. You should place it inside /vendor/formvalidation/dist/js/addons directory -->
+<script src="/vendor/formvalidation/dist/js/addons/reCaptcha2.min.js"></script>
+{% endhighlight %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Calling the add-on</h2>
+                    <p>It's possible to call the add-on in both programmatic and declarative ways:</p>
+
+                    <div class="doc-demo">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#programmatic-tab" data-toggle="tab">Programmatic code</a></li>
+                            <li><a href="#declarative-tab" data-toggle="tab">Declarative code</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="programmatic-tab">
+{% highlight javascript %}
+$('#signUpForm').formValidation({
+    framework: '...',
+    icon: {
+        ...
+    },
+    addOns: {
+        reCaptcha2: {
+            element: 'captchaContainer',
+            language: 'en',
+            theme: 'light',
+            siteKey: '6LdgOwETAAAAALA9auuNVKFeXizXcYFrKOVC_vs-',
+            timeout: 120,
+            message: 'The captcha is not valid'
+        }
+    },
+    fields: {
+        ...
+    }
+});
+{% endhighlight %}
+                            </div>
+
+                            <div class="tab-pane" id="declarative-tab">
+                                <div class="doc-alert doc-alert-info">
+                                    <p>If you want to use multiple add-ons, just simply separate them by a comma in data-fv-addons attribute:</p>
+                                    <p>data-fv-addons="reCaptcha2, requiredIcon, externalButton"</p>
+                                </div>
+
+{% highlight html %}
+<form id="signUpForm" method="post" class="form-horizontal"
+    data-fv-addons="reCaptcha2"
+    data-fv-addons-recaptcha2-element="captchaContainer"
+    data-fv-addons-recaptcha2-language="en"
+    data-fv-addons-recaptcha2-theme="light"
+    data-fv-addons-recaptcha2-sitekey="6LdgOwETAAAAALA9auuNVKFeXizXcYFrKOVC_vs-"
+    data-fv-addons-recaptcha2-timeout="120"
+    data-fv-addons-recaptcha2-message="The captcha is not valid">
+    ...
+</form>
+{% endhighlight %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <p>The reCaptcha2 add-on provides the following options:</p>
+
+                    <p><sup>*</sup> &mdash; Required option</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Option</th>
+                                    <th>HTML attribute</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>element</code><sup>*</sup></td>
+                                    <td><code>data-fv-addons-recaptcha2-element</code></td>
+                                    <td><code>String</code></td>
+                                    <td>The ID of element showing the captcha</td>
+                                </tr>
+                                <tr>
+                                    <td><code>language</code></td>
+                                    <td><code>data-fv-addons-recaptcha2-language</code></td>
+                                    <td><code>String</code></td>
+                                    <td>The <a href="https://developers.google.com/recaptcha/docs/language">language code</a> defined by reCAPTCHA</td>
+                                </tr>
+                                <tr>
+                                    <td><code>message</code><sup>*</sup></td>
+                                    <td><code>data-fv-addons-recaptcha2-message</code></td>
+                                    <td><code>String</code></td>
+                                    <td>The error message that will be shown in case the captcha is not valid. You don't need to define it if the back-end URL above returns the message</td>
+                                </tr>
+                                <tr>
+                                    <td><code>siteKey</code><sup>*</sup></td>
+                                    <td><code>data-fv-addons-recaptcha2-sitekey</code></td>
+                                    <td><code>String</code></td>
+                                    <td>The site key provided by Google</td>
+                                </tr>
+                                <tr>
+                                    <td><code>theme</code></td>
+                                    <td><code>data-fv-addons-recaptcha2-theme</code></td>
+                                    <td><code>String</code></td>
+                                    <td>
+                                        <p>The <a href="https://developers.google.com/recaptcha/docs/display#config">theme name</a> provided by Google. It can be one of</p>
+                                        <ul class="doc-list">
+                                            <li>light <span class="label label-default">default</span></li>
+                                            <li>dark</li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>timeout</code></td>
+                                    <td><code>data-fv-addons-recaptcha2-timeout</code></td>
+                                    <td><code>Number</code></td>
+                                    <td>The number of seconds that session will expire. After this amount of time, you will be asked to enter a new captcha. The default value is 120 (2 minutes)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Example</h2>
+
+                    <p>Below is the piece of code showing programmatic and declarative usages:</p>
+
+                    {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic,declarative" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Change log</h2>
+
+                    <ul class="doc-list">
+                        <li>
+                            <p>v0.3.0:</p>
+                            <ul class="doc-list">
+                                <li>Support multiple reCAPTCHA v2 elements on the same page</li>
+                                <li>Add Grunt build and minified files</li>
+                            </ul>
+                        </li>
+                        <li>v0.2.0: Add localization support</li>
+                        <li>v0.1.0: First release</li>
+                    </ul>
+                </section>
+            </div>
+
+            <div class="col-md-3">
+                <div class="doc-addon">
+                    <div class="doc-addon-image"><img class="img-responsive" src="/addons/recaptcha2/cover.png" alt="FormValidation reCaptcha2 add-on" /></div>
+
+                    <div class="doc-addon-meta">
+                        <a href="{{ page.download }}" class="btn btn-success addonDownloadButton" data-placement="bottom" data-container="body"><i class="fa fa-download"></i> {{ page.file }}</a>
+                    </div>
+                </div>
+
+                <div class="hidden-print hidden-xs hidden-sm">
+                    {% include ad.html %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    var RECAPTCHA1_NAME = 'recaptcha2';
+    $.ajax({
+        dataType: 'jsonp',
+        url: 'https://api.github.com/repos/formvalidation/addon-recaptcha/releases',
+        success: function(response) {
+            var total = 0;
+            if (response.data) {
+                for (var i in response.data) {
+                    for (var j in response.data[i].assets) {
+                        if (response.data[i].assets[j].name.substr(0, RECAPTCHA1_NAME.length) === RECAPTCHA1_NAME) {
+                            total += (response.data[i].assets[j].download_count || 0);
+                        }
+                    }
+                }
+            }
+            $('.addonDownloadButton').attr('data-title', total + (total <= 1 ? ' download' : ' downloads')).tooltip();
+        }
+    })
+});
+</script>

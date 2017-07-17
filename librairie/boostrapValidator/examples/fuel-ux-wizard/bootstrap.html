@@ -1,0 +1,23 @@
+---
+layout: demo/bootstrap
+title: Playing with Fuel UX Wizard
+permalink: /examples/fuel-ux-wizard/bootstrap.html
+sitemap: false
+image: /examples/fuel-ux-wizard/cover.png
+---
+
+{% include_relative bootstrap.programmatic %}
+
+<script>
+$(document).ready(function() {
+    $('#orderWizard')
+        .on('changed.fu.wizard', function(e, data) {
+            var $body  = $('body'),
+                $iframe = $body.data('iframe.fv');
+            if ($iframe) {
+                // Adjust the height of iframe
+                $iframe.height($body.height());
+            }
+        });
+});
+</script>

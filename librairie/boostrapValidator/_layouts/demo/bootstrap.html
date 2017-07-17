@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article#">
+    {% include demo/head.html %}
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/vendor/formvalidation/css/formValidation.min.css">
+    <link rel="stylesheet" href="/asset/css/demo.css">
+
+    <script src="//cdn.jsdelivr.net/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="/vendor/formvalidation/js/formValidation.min.js"></script>
+    <script src="/vendor/formvalidation/js/framework/bootstrap.min.js"></script>
+</head>
+<body class="demo-bootstrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-9" id="demoContainer">
+                {{ content }}
+            </div>
+
+            <div class="col-lg-3">
+                <div class="demo-ad">{% include ad.html %}</div>
+            </div>
+        </div>
+    </div>
+
+<script>
+{% include demo/foot.js %}
+</script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<form id="messageForm" class="fv-form-horizontal">
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Message</label>
+        </div>
+        <div class="small-9 columns">
+            <textarea name="message" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Email address</label>
+        </div>
+        <div class="small-6 small-pull-3 columns">
+            <input type="text" name="email" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-9 small-push-3 columns">
+            <button type="submit" class="button">Send</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#messageForm').formValidation({
+        framework: 'foundation',
+        icon: {
+            valid: 'fa fa-check',
+            invalid: 'fa fa-times',
+            validating: 'fa fa-refresh'
+        },
+        fields: {
+            message: {
+                // The messages for this field are shown as usual
+                validators: {
+                    notEmpty: {
+                        message: 'The message is required'
+                    },
+                    stringLength: {
+                        min: 20,
+                        max: 500,
+                        message: 'The message must be more than 20 and less than 500 characters long'
+                    }
+                }
+            },
+            email: {
+                // Show the message in a tooltip
+                err: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The email address is not valid'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

@@ -1,0 +1,19 @@
+---
+layout: demo/bootstrap
+title: Skip validation on specific submit button
+permalink: /examples/skip-validation-specific-submit-button/bootstrap.html
+sitemap: false
+---
+
+{% include_relative bootstrap.programmatic %}
+
+<script>
+$(document).ready(function() {
+    // You don't need to care about the following code
+    // It's for this specific example
+    $('#skipButton').on('click', function(e) {
+        e.preventDefault();
+        return false;
+    });
+});
+</script>

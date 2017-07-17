@@ -1,0 +1,42 @@
+---
+layout: default
+title: Can't submit form after validation
+permalink: /examples/cant-submit-form-after-validation/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Can't submit form after validation</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>After clicking the submit button, the plugin will submit the form automatically if all fields are valid.</p>
+                <p>If the form can't be submitted, the reason might be caused by using <code>name="submit"</code> or <code>id="submit"</code> attribute for the submit button.</p>
+
+                <p>Behind the scene, FormValidation uses the jQuery's <a href="https://api.jquery.com/submit/">submit()</a> method to submit the form.
+                    If the submit button has either <code>name="submit"</code> or <code>id="submit"</code> attribute, then <code>$(form)[0].submit</code> will
+                    return the submit button instance instead of submitting the form.</p>
+
+                <p>That's why we can't submit the form. The similar issue occurs when using special properties of form such as <code>reset</code>, <code>length</code>, <code>method</code>.</p>
+
+{% highlight html %}
+<!-- Do NOT -->
+<button type="submit" name="submit" class="btn btn-primary">Submit</button>
+
+<!-- Do -->
+<button type="submit" name="submitButton" class="btn btn-primary">Submit</button>
+{% endhighlight %}
+
+                <p><a href="http://kangax.github.com/domlint/">DOMLint</a> has a complete list of rules to check the markup for these kind of problems.</p>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

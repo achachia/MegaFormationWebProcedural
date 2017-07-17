@@ -1,0 +1,23 @@
+---
+layout: demo/bootstrap
+title: Playing with FuelUX
+permalink: /examples/fuel-ux/bootstrap.html
+sitemap: false
+---
+
+{% include_relative bootstrap.programmatic %}
+
+<script>
+$(document).ready(function() {
+    $('#artistsPillbox').on('added.fu.pillbox removed.fu.pillbox', function(e, item) {
+        var $body   = $('body'),
+            $iframe = $body.data('iframe.fv');
+        if ($iframe) {
+            setTimeout(function() {
+                // Adjust the height of iframe
+                $iframe.height($body.height() + 10);
+            }, 200);
+        }
+    });
+});
+</script>

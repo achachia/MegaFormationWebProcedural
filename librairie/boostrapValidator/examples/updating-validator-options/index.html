@@ -1,0 +1,56 @@
+---
+layout: default
+title: Updating validator options
+permalink: /examples/updating-validator-options/
+image: /examples/updating-validator-options/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Updating validator options</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>When setting validator options for fields, the usual way is</p>
+
+{% highlight javascript %}
+$(form).formValidation({
+    fields: {
+        fieldName: {
+            validators: {
+                validatorName: {
+                    // The error message
+                    message: '...',
+
+                    // Other validator options
+                    // ...
+                }
+            }
+        }
+    }
+});
+{% endhighlight %}
+
+                <p>The following example demonstrates the ability of updating message and validator options on the fly. It is simple job application form which asks user to upload the correct file based on the selected job position.
+                <p>The validator options can be updated via the <a href="/api/#update-option">updateOption()</a> method.</p>
+                <p>Although <code>message</code> is common option of all validators, FormValidation provides the <a href="/api/#update-message">updateMessage()</a> method to update it instead of <code>updateOption()</code>.</p>
+
+                <div class="doc-alert doc-alert-info">
+                    <p>To update message of validators supporting <a href="/settings/#dynamic-message">dynamic message</a>, in additional to calling the updateMessage() method, you also might need to use the updateOption() method as following:</p>
+                    <p>$(form).formValidation('updateMessage', field, validatorName, newMessage);</p>
+                    <p>$(form).formValidation('updateOption', field, validatorName, 'message', newMessage);</p>
+                </div>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+<form id="eventForm" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Event name</label>
+        <div class="col-xs-5">
+            <input type="text" class="form-control" name="name" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Location</label>
+        <div class="col-xs-5">
+            <input type="text" class="form-control" name="location" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Start date</label>
+        <div class="col-xs-4">
+            <input type="text" class="form-control" name="startDate" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">End date</label>
+        <div class="col-xs-4">
+            <input type="text" class="form-control" name="endDate" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-9 col-xs-offset-3">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#eventForm').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The event name is required'
+                    }
+                }
+            },
+            location: {
+                validators: {
+                    notEmpty: {
+                        message: 'The location is required'
+                    }
+                }
+            },
+            startDate: {
+                validators: {
+                    notEmpty: {
+                        message: 'The start date is required'
+                    },
+                    date: {
+                        message: 'The start date is not valid',
+                        format: 'YYYY-MM-DD',
+                        max: 'endDate'
+                    }
+                },
+                onSuccess: function(e, data) {
+                    // data.fv is the plugin instance
+                    // Revalidate the end date if it's not valid
+                    if (!data.fv.isValidField('endDate')) {
+                        data.fv.revalidateField('endDate');
+                    }
+                }
+            },
+            endDate: {
+                validators: {
+                    notEmpty: {
+                        message: 'The end date is required'
+                    },
+                    date: {
+                        message: 'The end date is not valid',
+                        format: 'YYYY-MM-DD',
+                        min: 'startDate'
+                    }
+                },
+                onSuccess: function(e, data) {
+                    // data.fv is the plugin instance
+                    // Revalidate the start date if it's not valid
+                    if (!data.fv.isValidField('startDate')) {
+                        data.fv.revalidateField('startDate');
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

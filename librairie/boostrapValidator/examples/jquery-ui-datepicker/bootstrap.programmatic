@@ -1,0 +1,33 @@
+<script>
+$(document).ready(function() {
+    $('#profileForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                dob: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The date of birth is required'
+                        },
+                        date: {
+                            format: 'MM/DD/YYYY',
+                            message: 'The date of birth is not valid'
+                        }
+                    }
+                }
+            }
+        })
+        .find('[name="dob"]')
+            .datepicker({
+                onSelect: function(date, inst) {
+                    // Revalidate the field when choosing it from the datepicker
+                    $('#profileForm').formValidation('revalidateField', 'dob');
+                }
+            });
+});
+</script>

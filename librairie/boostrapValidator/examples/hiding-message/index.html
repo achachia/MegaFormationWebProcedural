@@ -1,0 +1,31 @@
+---
+layout: default
+title: Hiding messages
+permalink: /examples/hiding-message/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Hiding messages</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>In order to archive this, there are two things you need to know:</p>
+                <ul class="doc-list">
+                    <li>The <a href="/settings#event-field">err.field.fv</a> event is triggered when the field is invalid</li>
+                    <li>The element containing field messages can be retrieved via <code>$field.data('fv.messages')</code></li>
+                </ul>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

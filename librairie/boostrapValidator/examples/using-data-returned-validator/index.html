@@ -1,0 +1,224 @@
+---
+layout: default
+title: Using data returned by validator
+permalink: /examples/using-data-returned-validator/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Using data returned by validator</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <p>In general, most of <a href="/validators/">validators</a> return <code>true</code> if the field is valid or <code>false</code> otherwise.</p>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Validator</th>
+                                    <th>Returned value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="/validators/callback/">callback</a> validator</td>
+                                    <td>
+{% highlight javascript %}
+function(value, validator, $field) {
+    return true;    // or false
+}
+{% endhighlight %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/validators/remote/">remote</a> validator</td>
+                                    <td>
+<p>The remote URL has to return an encoded JSON of array containing the <code>valid</code> key:</p>
+{% highlight javascript %}
+{ "valid": true or false }
+{% endhighlight %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/developing/">Your own</a> validator</td>
+                                    <td>
+{% highlight javascript %}
+FormValidation.Validator.validatorName = {
+    validate: function(validator, $field, options) {
+        return true;    // or false;
+    }
+};
+{% endhighlight %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>What if you want to attach more data to the returned value and reuse it later? Fortunately, in addition to the boolean value indicating
+                    the field validity, it's easy to include more data to the returned value of validators as following:</p>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Validator</th>
+                                    <th>Returned value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="/validators/callback/">callback</a> validator</td>
+                                    <td>
+{% highlight javascript %}
+function(value, validator, $field) {
+    return {
+        valid: true,    // or false
+        key: 'value of key',
+        anotherKey: 'value of key'
+    };
+}
+{% endhighlight %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/validators/remote/">remote</a> validator</td>
+                                    <td>
+<p>The remote URL has to return an encoded JSON of array containing the <code>valid</code> and other keys:</p>
+{% highlight javascript %}
+{
+    "valid": true,      // or false,
+    "key": "value of key",
+    "anotherKey": "value of key"
+}
+{% endhighlight %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="/developing/">Your own</a> validator</td>
+                                    <td>
+{% highlight javascript %}
+FormValidation.Validator.validatorName = {
+    validate: function(validator, $field, options) {
+        return {
+            valid: true,    // or false
+            key: 'value of key',
+            anotherKey: 'value of key'
+        };
+    }
+};
+{% endhighlight %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>Then you can get the returned value when triggering the <a href="/settings/#event-validator">validator events</a>:</p>
+
+{% highlight javascript %}
+$(form)
+    .formValidation(options)
+
+    // This event is triggered when the field doesn't pass any validator
+    .on('err.validator.fv', function(e, data) {
+        // data.field     --> The field name
+        // data.element   --> The field element
+        // data.validator --> The validator name
+        // data.result    --> The data returned by the validator
+
+        // Do something ...
+    })
+
+    // This event is triggered when the field passes any validator
+    .on('success.validator.fv', function(e, data) {
+        // e, data parameters are the same as
+        // in the err.validator.fv event above
+
+        // Do something ...
+    });
+{% endhighlight %}
+
+                    <p>In the next section, I will demonstrate how to use this approach in some examples.</p>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Password strength meter</h2>
+
+                    <p>The following example shows how strong a password is. We define various rules to define a strong password.
+                        Each rule provides a score for the password if it passes the rule.</p>
+
+                    <p>When user change the password, we loop over the rules and calculate the score. Finally, based on the score,
+                        we display the password strength which can be one of the following levels:</p>
+                    <ul class="doc-list">
+                        <li>Very weak, if the score is less than 0</li>
+                        <li>Weak, if the score is between 0 and 2</li>
+                        <li>Medium, if the score is between 2 and 4</li>
+                        <li>Strong, if the score is greater than 4</li>
+                    </ul>
+
+                    <p>To archive this, we use the <a href="/validators/callback/">callback</a> validator to calculate the password score. And then
+                        trigger the <code>success.validator.fv</code> event to get the score, and show up the level. Looking at the code will give you the implementation details.</p>
+
+                    <div class="doc-alert doc-alert-info">
+                        The rules and their scores in this example are simple as for demonstrating purpose only.
+                        In fact, it's up to you to define more rules and strength levels
+                    </div>
+
+                    {% include demo/tabs.html id="callback" frameworks="bootstrap" dir="callback" codes="programmatic" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Suggesting new username</h2>
+
+                    <p>In a form for signing up new account, we often use the <a href="/validators/remote/">remote</a> validator to check if the username
+                        is available or not.</p>
+                    <p>We can query against the database to check the availability of username which is similar to the given one. And then suggest
+                        them to user if they are not taken.</p>
+
+                    <p>For instance, the remote URL might suggests a list of available username with the full responses as below:</p>
+
+{% highlight javascript %}
+{
+    "valid": "false",
+    "suggestions": ["username1", "username2", "username3"]
+}
+{% endhighlight %}
+
+                    <p>The following form shows how this approach works in action:</p>
+
+                    <div class="doc-alert doc-alert-warning">
+                        For testing purpose, the back-end used in the example always responses the same list of available username
+                    </div>
+
+                    {% include demo/tabs.html id="remote" frameworks="bootstrap" dir="remote" codes="programmatic" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Related examples</h2>
+
+                    <ul class="doc-list">
+                        <li><a href="/examples/adding-warning-validation-state/">Adding warning validation state</a></li>
+                        <li><a href="/examples/using-mailgun-api-validate-email-address/">Using Mailgun API to validate email address</a></li>
+                    </ul>
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

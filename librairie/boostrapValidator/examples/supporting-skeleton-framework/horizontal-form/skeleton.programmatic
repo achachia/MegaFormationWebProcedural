@@ -1,0 +1,184 @@
+<form id="signupForm" class="fv-form-horizontal" method="post">
+    <div class="row">
+        <label class="three columns">Full name</label>
+
+        <div class="four columns">
+            <input name="firstName" type="text" class="u-full-width" placeholder="First name" />
+        </div>
+
+        <div class="four columns">
+            <input name="lastName" type="text" class="u-full-width" placeholder="Last name" />
+        </div>
+    </div>
+
+    <div class="row">
+        <label class="three columns">Username</label>
+
+        <div class="six columns">
+            <input name="username" type="text" class="u-full-width" />
+        </div>
+    </div>
+
+    <div class="row">
+        <label class="three columns">Email address</label>
+
+        <div class="six columns">
+            <input name="email" type="text" class="u-full-width" />
+        </div>
+    </div>
+
+    <div class="row">
+        <label class="three columns">Password</label>
+
+        <div class="six columns">
+            <input name="password" type="password" class="u-full-width" />
+        </div>
+    </div>
+
+    <div class="row">
+        <label class="three columns">Gender</label>
+
+        <div class="six columns">
+            <label>
+                <input name="gender" type="radio" value="male" />
+                <span class="label-body">Male</span>
+            </label>
+            <label>
+                <input name="gender" type="radio" value="female" />
+                <span class="label-body">Female</span>
+            </label>
+            <label>
+                <input name="gender" type="radio" value="other" />
+                <span class="label-body">Other</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="row">
+        <label class="three columns">
+            <span id="captchaOperation"></span>
+        </label>
+
+        <div class="two columns">
+            <input type="text" name="captcha" class="u-full-width" />
+        </div>
+    </div>
+
+    <div class="row">
+        <label class="three columns"></label>
+        <div class="eight columns">
+            <label>
+                <input name="agree" type="checkbox" />
+                <span class="label-body">Agree with the terms and conditions</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="row">
+        <label class="three columns"></label>
+        <div class="nine columns">
+            <button type="submit" class="button-primary">Sign up</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    // Generate a simple captcha
+    function randomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+    };
+    $('#captchaOperation').html([randomNumber(1, 100), '+', randomNumber(1, 200), '='].join(' '));
+
+    $('#signupForm').formValidation({
+        framework: 'skeleton',
+        row: {
+            selector: '.columns'
+        },
+        icon: {
+            valid: 'fa fa-check',
+            invalid: 'fa fa-times',
+            validating: 'fa fa-refresh',
+            feedback: 'fv-control-feedback'
+        },
+        fields: {
+            firstName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The first name is required'
+                    }
+                }
+            },
+            lastName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required'
+                    }
+                }
+            },
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password cannot be the same as username'
+                    }
+                }
+            },
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'The gender is required'
+                    }
+                }
+            },
+            captcha: {
+                validators: {
+                    callback: {
+                        message: 'Wrong answer',
+                        callback: function(value, validator) {
+                            var items = $('#captchaOperation').html().split(' '), sum = parseInt(items[0]) + parseInt(items[2]);
+                            return value == sum;
+                        }
+                    }
+                }
+            },
+            agree: {
+                validators: {
+                    notEmpty: {
+                        message: 'You must agree with the terms and conditions'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

@@ -1,0 +1,44 @@
+<form id="signupForm" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Username</label>
+        <div class="col-xs-5">
+            <input type="text" class="form-control" name="username" />
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#signupForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                username: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The username is required and cannot be empty'
+                        },
+                        remote: {
+                            message: 'The username is not available',
+                            url: '/examples/using-data-returned-validator/remote/response.json'
+                        }
+                    }
+                }
+            }
+        })
+        .on('err.validator.fv', function(e, data) {
+            if (data.field === 'username' && data.validator === 'remote') {
+                var suggestions = data.result.suggestions;
+                // Update the message
+                suggestions
+                    ? data.fv.updateMessage('username', 'remote', 'Not available. You might choose other one: ' + suggestions.join(', '))
+                    : data.fv.updateMessage('username', 'remote', 'The username is not available');
+            }
+        });
+});
+</script>

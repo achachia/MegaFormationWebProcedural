@@ -1,0 +1,67 @@
+[21-Oct-2014 18:01:15 UTC] PHP Warning:  Missing argument 2 for infos_coupon(), called in /home/megacour/public_html/pdf/generer_pdf/liste_coupon.php on line 32 and defined in /home/megacour/public_html/pdf/fonctions/coupon_famille/coupon_famille.php on line 15
+[20-Jan-2015 08:41:13 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting catch (T_CATCH) in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 54
+[20-Jan-2015 08:42:23 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting catch (T_CATCH) in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 54
+[20-Jan-2015 08:43:01 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting catch (T_CATCH) in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 54
+[20-Jan-2015 08:43:02 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting catch (T_CATCH) in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 54
+[20-Jan-2015 08:43:03 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting catch (T_CATCH) in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 54
+[20-Jan-2015 08:43:51 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting catch (T_CATCH) in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 54
+[20-Jan-2015 08:43:52 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting catch (T_CATCH) in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 54
+[20-Jan-2015 08:43:53 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting catch (T_CATCH) in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 54
+[20-Jan-2015 08:43:53 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting catch (T_CATCH) in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 54
+[20-Jan-2015 08:43:53 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting catch (T_CATCH) in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 54
+[20-Jan-2015 08:43:54 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting catch (T_CATCH) in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 54
+[20-Jan-2015 08:43:54 UTC] PHP Parse error:  syntax error, unexpected 'function' (T_FUNCTION), expecting catch (T_CATCH) in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 54
+[20-Jan-2015 15:12:36 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens' in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php:31
+Stack trace:
+#0 /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php(31): PDOStatement->execute()
+#1 /home/megacour/public_html/pdf/generer_pdf/attestation_fiscale.php(21): infos_attestation('2014', 'CF29')
+#2 {main}
+  thrown in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 31
+[20-Jan-2015 15:17:20 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens' in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php:31
+Stack trace:
+#0 /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php(31): PDOStatement->execute()
+#1 /home/megacour/public_html/pdf/generer_pdf/attestation_fiscale.php(21): infos_attestation('2014', 'CF29')
+#2 {main}
+  thrown in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 31
+[20-Jan-2015 15:17:49 UTC] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens' in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php:31
+Stack trace:
+#0 /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php(31): PDOStatement->execute()
+#1 /home/megacour/public_html/pdf/generer_pdf/attestation_fiscale.php(21): infos_attestation('2014', 'CF29')
+#2 {main}
+  thrown in /home/megacour/public_html/pdf/fonctions/attestation_fiscale/infos_attestation.php on line 31
+[22-Feb-2015 10:40:30 UTC] PHP Parse error:  syntax error, unexpected 'catch' (T_CATCH) in /home/megacour/public_html/pdf/generer_pdf/facture.php on line 58
+[22-Feb-2015 10:41:47 UTC] PHP Parse error:  syntax error, unexpected '}', expecting catch (T_CATCH) in /home/megacour/public_html/pdf/generer_pdf/facture.php on line 59
+[25-Feb-2015 09:44:56 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/megacour/public_html/pdf/generer_pdf/res/livre_recettes.php on line 42
+[25-Feb-2015 09:46:55 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/megacour/public_html/pdf/generer_pdf/res/livre_recettes.php on line 42
+[25-Feb-2015 09:47:33 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/megacour/public_html/pdf/generer_pdf/res/livre_recettes.php on line 42
+[25-Feb-2015 09:49:28 UTC] PHP Parse error:  syntax error, unexpected '&&' (T_BOOLEAN_AND), expecting ',' or ')' in /home/megacour/public_html/pdf/generer_pdf/livre_recettes.php on line 19
+[25-Feb-2015 09:49:51 UTC] PHP Fatal error:  Call to undefined function total_recettes() in /home/megacour/public_html/pdf/generer_pdf/livre_recettes.php on line 27
+[14-May-2015 18:03:51 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/megacour/public_html/pdf/generer_pdf/test.php on line 2
+[14-May-2015 18:04:36 UTC] PHP Parse error:  syntax error, unexpected '=' in /home/megacour/public_html/pdf/generer_pdf/test.php on line 2
+[14-May-2015 18:14:49 UTC] PHP Fatal error:  Cannot use object of type stdClass as array in /home/megacour/public_html/pdf/generer_pdf/test.php on line 4
+[14-May-2015 20:29:12 UTC] PHP Warning:  array_shift() expects parameter 1 to be array, object given in /home/megacour/public_html/pdf/generer_pdf/test.php on line 4
+[14-May-2015 20:29:12 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/megacour/public_html/pdf/generer_pdf/test.php on line 5
+[14-May-2015 20:35:44 UTC] PHP Warning:  explode() expects at least 2 parameters, 1 given in /home/megacour/public_html/pdf/generer_pdf/test.php on line 7
+[14-May-2015 20:35:44 UTC] PHP Warning:  explode() expects at least 2 parameters, 1 given in /home/megacour/public_html/pdf/generer_pdf/test.php on line 7
+[14-May-2015 20:35:44 UTC] PHP Warning:  explode() expects at least 2 parameters, 1 given in /home/megacour/public_html/pdf/generer_pdf/test.php on line 7
+[14-May-2015 20:35:44 UTC] PHP Warning:  explode() expects at least 2 parameters, 1 given in /home/megacour/public_html/pdf/generer_pdf/test.php on line 7
+[14-May-2015 20:35:44 UTC] PHP Warning:  explode() expects at least 2 parameters, 1 given in /home/megacour/public_html/pdf/generer_pdf/test.php on line 7
+[14-May-2015 20:35:44 UTC] PHP Warning:  explode() expects at least 2 parameters, 1 given in /home/megacour/public_html/pdf/generer_pdf/test.php on line 7
+[14-May-2015 20:35:44 UTC] PHP Warning:  explode() expects at least 2 parameters, 1 given in /home/megacour/public_html/pdf/generer_pdf/test.php on line 7
+[14-May-2015 20:35:44 UTC] PHP Warning:  explode() expects at least 2 parameters, 1 given in /home/megacour/public_html/pdf/generer_pdf/test.php on line 7
+[14-May-2015 20:35:44 UTC] PHP Warning:  explode() expects at least 2 parameters, 1 given in /home/megacour/public_html/pdf/generer_pdf/test.php on line 7
+[14-May-2015 20:35:44 UTC] PHP Warning:  explode() expects at least 2 parameters, 1 given in /home/megacour/public_html/pdf/generer_pdf/test.php on line 7
+[22-Oct-2015 12:44:15 Europe/Paris] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/megacour/public_html/librairie/Html2pdf/generer_pdf/facture.php:60) in /home/megacour/public_html/librairie/Html2pdf/_tcpdf_5.0.002/tcpdf.php on line 6122
+[03-Nov-2015 10:03:34 Europe/Paris] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/megacour/public_html/librairie/Html2pdf/generer_pdf/facture.php:60) in /home/megacour/public_html/librairie/Html2pdf/_tcpdf_5.0.002/tcpdf.php on line 6122
+[03-Nov-2015 10:04:29 Europe/Paris] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/megacour/public_html/librairie/Html2pdf/generer_pdf/facture.php:60) in /home/megacour/public_html/librairie/Html2pdf/_tcpdf_5.0.002/tcpdf.php on line 6122
+[03-Nov-2015 10:16:03 Europe/Paris] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/megacour/public_html/librairie/Html2pdf/generer_pdf/facture.php:46) in /home/megacour/public_html/librairie/Html2pdf/_tcpdf_5.0.002/tcpdf.php on line 6122
+[03-Nov-2015 10:16:34 Europe/Paris] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/megacour/public_html/librairie/Html2pdf/generer_pdf/facture.php:46) in /home/megacour/public_html/librairie/Html2pdf/_tcpdf_5.0.002/tcpdf.php on line 6122
+[03-Nov-2015 10:17:36 Europe/Paris] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/megacour/public_html/librairie/Html2pdf/generer_pdf/facture.php:46) in /home/megacour/public_html/librairie/Html2pdf/_tcpdf_5.0.002/tcpdf.php on line 6122
+[03-Nov-2015 10:18:03 Europe/Paris] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/megacour/public_html/librairie/Html2pdf/generer_pdf/facture.php:46) in /home/megacour/public_html/librairie/Html2pdf/_tcpdf_5.0.002/tcpdf.php on line 6122
+[03-Nov-2015 10:18:23 Europe/Paris] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/megacour/public_html/librairie/Html2pdf/generer_pdf/facture.php:46) in /home/megacour/public_html/librairie/Html2pdf/_tcpdf_5.0.002/tcpdf.php on line 6122
+[03-Nov-2015 10:21:34 Europe/Paris] PHP Parse error:  syntax error, unexpected '/' in /home/megacour/public_html/librairie/Html2pdf/generer_pdf/facture.php on line 47
+[03-Nov-2015 11:38:54 Europe/Paris] PHP Warning:  Division by zero in /home/megacour/public_html/librairie/Html2pdf/generer_pdf/liste_coupon.php on line 26
+[07-Jan-2016 15:46:59 Europe/Paris] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/megacour/public_html/librairie/Html2pdf/generer_pdf/attestation_fiscale.php:52) in /home/megacour/public_html/librairie/Html2pdf/generer_pdf/attestation_fiscale.php on line 56
+[07-Jan-2016 22:51:18 Europe/Paris] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/megacour/public_html/librairie/Html2pdf/generer_pdf/attestation_fiscale.php:41) in /home/megacour/public_html/librairie/Html2pdf/generer_pdf/attestation_fiscale.php on line 55
+[08-Jan-2016 09:07:24 Europe/Paris] PHP Fatal error:  Cannot redeclare formatage_nombre() (previously declared in /home/megacour/public_html/librairie/Html2pdf/fonctions/attestation_fiscale/infos_attestation.php:2) in /home/megacour/public_html/librairie/Html2pdf/fonctions/attestation_fiscale/liste_prestation_annuel.php on line 14
+[26-Jan-2016 20:59:23 Europe/Paris] PHP Parse error:  syntax error, unexpected '.' in /home/megacour/public_html/librairie/Html2pdf/fonctions/coupon_famille/coupon_famille.php on line 37

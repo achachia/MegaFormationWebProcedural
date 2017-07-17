@@ -1,0 +1,118 @@
+<form id="registrationForm" class="fv-form-horizontal"
+    data-fv-framework="foundation"
+    data-fv-icon-valid="fa fa-check"
+    data-fv-icon-invalid="fa fa-times"
+    data-fv-icon-validating="fa fa-refresh">
+
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Full name</label>
+        </div>
+        <div class="small-9 columns">
+            <div class="row">
+                <div class="small-6 columns">
+                    <input type="text" name="firstName" placeholder="First name"
+                        data-fv-row=".small-6"
+                        data-fv-notempty="true"
+                        data-fv-notempty-message="The first name is required"/>
+                </div>
+
+                <div class="small-6 columns">
+                    <input type="text" name="lastName" placeholder="Last name"
+                        data-fv-row=".small-6"
+                        data-fv-notempty="true"
+                        data-fv-notempty-message="The last name is required" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Username</label>
+        </div>
+        <div class="small-6 small-pull-3 columns">
+            <input type="text" name="username"
+                data-fv-notempty="true"
+                data-fv-notempty-message="The username is required"
+
+                data-fv-stringlength="true"
+                data-fv-stringlength-min="6"
+                data-fv-stringlength-max="30"
+                data-fv-stringlength-message="The username must be more than 6 and less than 30 characters long"
+
+                data-fv-regexp="true"
+                data-fv-regexp-regexp="^[a-zA-Z0-9_\.]+$"
+                data-fv-regexp-message="The username can only consist of alphabetical, number, dot and underscore" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Email address</label>
+        </div>
+        <div class="small-6 small-pull-3 columns">
+            <input type="text" name="email"
+                data-fv-notempty="true"
+                data-fv-notempty-message="The email address is required"
+
+                data-fv-emailaddress="true"
+                data-fv-emailaddress-message="The input is not a valid email address" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Password</label>
+        </div>
+        <div class="small-6 small-pull-3 columns">
+            <input type="password" name="password"
+                data-fv-notempty="true"
+                data-fv-notempty-message="The password is required"
+
+                data-fv-different="true"
+                data-fv-different-field="username"
+                data-fv-different-message="The password cannot be the same as username" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Gender</label>
+        </div>
+        <div class="small-6 small-pull-3 columns">
+            <input type="radio" name="gender" value="male"
+                data-fv-notempty="true"
+                data-fv-notempty-message="The gender is required" /><label>Male</label>
+            <input type="radio" name="gender" value="female" /><label>Female</label>
+            <input type="radio" name="gender" value="other" /><label>Other</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Date of birth</label>
+        </div>
+        <div class="small-4 small-pull-5 columns">
+            <input type="text" name="birthday" placeholder="YYYY/MM/DD"
+                data-fv-notempty="true"
+                data-fv-notempty-message="The date of birth is required"
+
+                data-fv-date="true"
+                data-fv-date-format="YYYY/MM/DD"
+                data-fv-date-message="The date of birth is not valid" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-9 small-push-3 columns">
+            <button type="submit" class="button" name="signup" value="Sign up">Submit</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#registrationForm').formValidation();
+});
+</script>

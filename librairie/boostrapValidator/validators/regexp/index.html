@@ -1,0 +1,110 @@
+---
+layout: default
+title: Check if the value matches given Javascript regular expression
+permalink: /validators/regexp/
+prev:
+    url: /validators/promise/
+    title: promise validator
+next:
+    url: /validators/remote/
+    title: remote validator
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>regexp validator</h1>
+        <p>Check if the value matches given Javascript regular expression</p>
+        <p>&larr; <a href="/validators">Validators</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <h2>Options</h2>
+
+                    <p><sup>*</sup> &mdash; Required option</p>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Option</th>
+                                    <th>HTML attribute</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>message</code></td>
+                                    <td><code>data-fv-regexp-message</code></td>
+                                    <td>String</td>
+                                    <td>The error message</td>
+                                </tr>
+                                <tr>
+                                    <td><code>regexp</code><sup>*</sup></td>
+                                    <td><code>data-fv-regexp-regexp</code> or <code>pattern</code></td>
+                                    <td>String</td>
+                                    <td>The Javascript regular expression</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="doc-alert doc-alert-info">
+                        When setting options via HTML attributes, remember to enable the validator by setting data-fv-regexp="true".<br/>
+                        You don't need to do that when using HTML 5 pattern="..." attribute.
+                    </div>
+
+                    <div class="doc-alert doc-alert-info">
+                        The message and other options can be updated on the fly via the <a href="/api/#update-message">updateMessage()</a> and <a href="/api/#update-option">updateOption()</a> methods
+                    </div>
+
+                    <h3>Using a correct pattern</h3>
+
+                    <p>If the validator still pass when the field value doesn't match the pattern, please ensure you use a correct pattern.</p>
+                    <p>Here are some check lists:</p>
+                    <ol>
+                        <li>
+                            <p>Is the pattern wrapped between <code>^</code> and <code>$</code>?</p>
+                            <p>For example, if a field must be 5 digits number, then <code>^\d{5}</code> (no <code>$</code> at the end) is wrong pattern. <code>^\d{5}$</code> is right one.</p>
+                        </li>
+                        <li>
+                            <p>Does the pattern work with external services?</p>
+                            <p>You can use the following services to test the regular expression:</p>
+                            <ul class="doc-list">
+                                <li><a href="http://regexr.com">regexr.com</a></li>
+                                <li><a href="http://regex101.com/">regex101.com</a></li>
+                                <li><a href="http://regexpal.com/">regexpal.com</a></li>
+                            </ul>
+                        </li>
+                    </ol>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Examples</h2>
+                    <p>In the following form, user is asked to enter the full name which alphabetical characters and spaces only.</p>
+
+                    <h3>Basic example</h3>
+                    {% include demo/tabs.html id="basic" frameworks="bootstrap" dir="basic" codes="programmatic,declarative" %}
+
+                    <h3>HTML 5 example</h3>
+                    <p>By default, the regexp validator will be used if the field uses HTML 5 <code>pattern</code> attribute. In order to disable the validator, just simply set <code>data-fv-regexp="false"</code>.</p>
+
+                    {% include demo/tabs.html id="html5" frameworks="bootstrap" dir="html5" codes="declarative" %}
+                </section>
+
+                {% include pagination.html %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                <div id="toc" class="doc-toc"></div>
+
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

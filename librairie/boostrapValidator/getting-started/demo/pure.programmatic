@@ -1,0 +1,129 @@
+<form id="registrationForm" class="pure-form pure-form-aligned">
+    <div class="pure-control-group">
+        <label>Full name</label>
+        <input name="firstName" type="text" placeholder="First name" />
+    </div>
+
+    <div class="pure-control-group">
+        <label></label>
+        <input name="lastName" type="text" placeholder="Last name" />
+    </div>
+
+    <div class="pure-control-group">
+        <label>Username</label>
+        <input name="username" type="text" placeholder="Username" />
+    </div>
+
+    <div class="pure-control-group">
+        <label>Email address</label>
+        <input name="email" type="text" placeholder="Email address" />
+    </div>
+
+    <div class="pure-control-group">
+        <label>Password</label>
+        <input name="password" type="password" placeholder="Password" />
+    </div>
+
+    <div class="pure-control-group">
+        <label>Gender</label>
+        <input name="gender" type="radio" value="male" /> Male<br/>
+        <label></label>
+        <input name="gender" type="radio" value="female" /> Female<br/>
+        <label></label>
+        <input name="gender" type="radio" value="other" /> Other<br/>
+    </div>
+
+    <div class="pure-control-group">
+        <label>Date of birth</label>
+        <input type="text" name="birthday" placeholder="YYYY/MM/DD" />
+    </div>
+
+    <div class="pure-control-group">
+        <label></label>
+        <button type="submit" class="pure-button pure-button-primary">Submit</button>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#registrationForm').formValidation({
+        framework: 'pure',
+        icon: {
+            valid: 'fa fa-check',
+            invalid: 'fa fa-times',
+            validating: 'fa fa-refresh'
+        },
+        fields: {
+            firstName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The first name is required'
+                    }
+                }
+            },
+            lastName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required'
+                    }
+                }
+            },
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password cannot be the same as username'
+                    }
+                }
+            },
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'The gender is required'
+                    }
+                }
+            },
+            birthday: {
+                validators: {
+                    notEmpty: {
+                        message: 'The date of birth is required'
+                    },
+                    date: {
+                        format: 'YYYY/MM/DD',
+                        message: 'The date of birth is not valid'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

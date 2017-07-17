@@ -1,0 +1,72 @@
+---
+layout: default
+title: Validating credit card expiration date
+permalink: /examples/validating-credit-card-expiration-date/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Validating credit card expiration date</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <p>FormValidation provides some built-in validators to validate a credit card information which include</p>
+                    <ul class="doc-list">
+                        <li><a href="/validators/creditCard/">creditCard</a> for credit card number validation</li>
+                        <li><a href="/validators/cvv/">cvv</a> for CVV number validation</li>
+                        <li><a href="/validators/stringCase/">stringCase</a> for owner name validation</li>
+                    </ul>
+
+                    <p>The question is that how to validate the expiration date which is often a required part in a payment form.
+                        Because the <a href="/validators/date/">date</a> validator asks for all the year, month and day, it isn't helpful in that case.</p>
+                    <p>This example introduces some approaches to solve this problem.</p>
+
+                    <div class="doc-alert doc-alert-info">
+                        For demonstrating purpose, the expiration date is treated as valid if it is in the range of current month and next 10 year
+                    </div>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Using two separated fields</h2>
+
+                    <p>Assume that you are using two separated fields for expiration date. The first field asks user to fill the expiration month,
+                        and the second one is for the expiration year.</p>
+
+                    <p>We will use the <a href="/validators/callback/">callback</a> validator to check the validity of month and year fields.
+                        Because these fields depend on each other, the <a href="/api#update-status">updateStatus()</a> method is used to set month/year field as valid one.</p>
+
+                    <div class="doc-alert doc-alert-info">
+                        The example uses the <a href="/settings/#field-row">row</a> option to indicate the field container when using multiple fields in the same row
+                    </div>
+
+                    {% include demo/tabs.html id="two-fields" frameworks="bootstrap" dir="two-fields" codes="programmatic" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Using one field</h2>
+
+                    <p>The second approach is applied when using one field for both expiration month and year. The valid format of the field is YYYY/MM.</p>
+                    <p>We will use the <a href="/validators/regexp/">regexp</a> validator to determine if the input follows the required format first,
+                        and the <a href="/validators/callback/">callback</a> validator to check whether or not it is expired by comparing with current date.</p>
+
+                    {% include demo/tabs.html id="one-field" frameworks="bootstrap" dir="one-field" codes="programmatic" %}
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                <div id="toc" class="doc-toc"></div>
+
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

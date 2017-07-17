@@ -1,0 +1,56 @@
+<form id="signinForm" class="uk-form">
+    <div class="uk-grid">
+        <div class="uk-width-2-5">
+            <input type="text" class="uk-width-1-1" name="username" placeholder="Username" />
+        </div>
+
+        <div class="uk-width-2-5">
+            <input type="password" class="uk-width-1-1" name="password" placeholder="Password" />
+        </div>
+
+        <div class="uk-width-1-5">
+            <!-- Do NOT use name="submit" or id="submit" for the Submit button -->
+            <button type="submit" class="uk-button uk-button-primary">Sign in</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#signinForm').formValidation({
+        framework: 'uikit',
+        icon: {
+            valid: 'uk-icon-check',
+            invalid: 'uk-icon-times',
+            validating: 'uk-icon-refresh'
+        },
+        fields: {
+            username: {
+                row: '.uk-width-2-5',
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'The username can only consist of alphabetical, number and underscore'
+                    }
+                }
+            },
+            password: {
+                row: '.uk-width-2-5',
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

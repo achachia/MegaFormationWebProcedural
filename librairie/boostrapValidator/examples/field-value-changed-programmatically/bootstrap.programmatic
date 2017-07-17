@@ -1,0 +1,60 @@
+<form id="profileForm" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Full name</label>
+        <div class="col-xs-4">
+            <input type="text" class="form-control" name="firstName" placeholder="First name" />
+        </div>
+        <div class="col-xs-4">
+            <input type="text" class="form-control" name="lastName" placeholder="Last name" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-9 col-xs-offset-3">
+            <button type="button" class="btn btn-primary" id="setValueButton">Set values</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#profileForm').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            firstName: {
+                row: '.col-xs-4',
+                validators: {
+                    notEmpty: {
+                        message: 'The first name is required'
+                    }
+                }
+            },
+            lastName: {
+                row: '.col-xs-4',
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required'
+                    }
+                }
+            }
+        }
+    });
+
+    $('#setValueButton').on('click', function() {
+        // Set value for fields
+        $('#profileForm')
+            .find('input[name="firstName"]').val('Form').end()
+            .find('input[name="lastName"]').val('Validation');
+
+        // Revalidate the fields
+        $('#profileForm')
+            .formValidation('revalidateField', 'firstName')
+            .formValidation('revalidateField', 'lastName');
+    });
+});
+</script>

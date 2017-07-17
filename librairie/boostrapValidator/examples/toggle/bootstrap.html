@@ -1,0 +1,21 @@
+---
+layout: demo/bootstrap
+title: Toggling field
+permalink: /examples/toggle/bootstrap.html
+sitemap: false
+---
+
+{% include_relative bootstrap.programmatic %}
+
+<script>
+$(document).ready(function() {
+    $('#togglingForm').on('click', 'button[data-toggle]', function() {
+        var $body  = $('body'),
+            $iframe = $body.data('iframe.fv');
+        if ($iframe) {
+            // Adjust the height of iframe
+            $iframe.height($body.height());
+        }
+    });
+});
+</script>

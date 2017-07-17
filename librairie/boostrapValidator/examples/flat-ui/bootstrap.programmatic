@@ -1,0 +1,107 @@
+<link rel="stylesheet" href="/vendor/flat-ui/css/flat-ui.min.css" />
+<script src="/vendor/flat-ui/js/flat-ui.min.js"></script>
+
+<!--
+Adjust feed back icon position
+See http://formvalidation.io/examples/adjusting-feedback-icon-position/
+-->
+<style type="text/css">
+#taskForm .form-control-feedback {
+    top: 0;
+}
+</style>
+
+<form id="taskForm">
+    <div class="form-group">
+        <label>Task title</label>
+        <input type="text" class="form-control" name="title" />
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <textarea name="description" class="form-control" rows="5"></textarea>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-xs-6">
+                <label>Priority</label>
+                <select class="form-control select select-primary select-block" name="priority">
+                    <option value="">Choose a priority level</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+
+            <div class="col-xs-6">
+                <label>Category</label>
+                <select class="form-control select select-primary select-block" name="category">
+                    <option value="">Choose a category</option>
+                    <option value="personal">Personal</option>
+                    <option value="home">Home</option>
+                    <option value="business">Business</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add task</button>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#taskForm')
+        .formValidation({
+            framework: 'bootstrap',
+            excluded: ':disabled',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                title: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The title is required'
+                        }
+                    }
+                },
+                description: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The description is required'
+                        },
+                        stringLength: {
+                            min: 50,
+                            max: 1000,
+                            message: 'The description must be more than 50 and less than 1000 characters'
+                        }
+                    }
+                },
+                priority: {
+                    row: '.col-xs-6',
+                    validators: {
+                        notEmpty: {
+                            message: 'The priority is required'
+                        }
+                    }
+                },
+                category: {
+                    row: '.col-xs-6',
+                    validators: {
+                        notEmpty: {
+                            message: 'The category is required'
+                        }
+                    }
+                }
+            }
+        })
+        // Using Flat UI's select component
+        .find('[name="priority"], [name="category"]')
+            .select2({
+                dropdownCssClass: 'select-inverse-dropdown'
+            });
+});
+</script>

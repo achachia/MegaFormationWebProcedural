@@ -1,0 +1,82 @@
+---
+layout: default
+title: Skip validation on specific submit button
+permalink: /examples/skip-validation-specific-submit-button/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Skip validation on specific submit button</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <p>Your form might have multiple submit buttons which have <code>type="submit"</code> attribute.
+                        Clicking on any submit button will perform validation and then submit the form if all the fields are valid.</p>
+
+                    <p>By default, the plugin will look for the buttons that are defined by the <a href="/settings/#form-button">button</a> option:</p>
+
+{% highlight javascript %}
+button: {
+    // The CSS selector indicates the button
+    selector: '[type="submit"]:not([formnovalidate])',
+
+    // The CSS class which is added to the button when it is disabled
+    disabled: ''
+}
+{% endhighlight %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Using the formnovalidate attribute</h2>
+
+                    <p>As seen in the <code>button.selector</code> option above, the plugin will ignore validation when clicking on the button that has <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#Attributes">formnovalidate</a> attribute.</p>
+                    <p>The simplest way to skip validation on particular button is to add <code>formnovalidate</code> attribute to it:</p>
+
+{% highlight html %}
+<!-- Validate and submit if the form is valid -->
+<button type="submit" class="btn btn-primary">Submit</button>
+
+<!-- Skip validation and just submit the form -->
+<button type="submit" class="btn btn-primary" formnovalidate>Just submit</button>
+{% endhighlight %}
+
+                    <div class="doc-alert doc-alert-warning">
+                        This solution is available only from v0.6.2 which default set of submit buttons do NOT include one having the formnovalidate attribute.
+                        If you are using the v0.6.0, v0.6.1, please use the second solution as described in the next section
+                    </div>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Using the button option</h2>
+
+                    <p>The following employment form has two submit buttons, but the validation is only triggered when clicking on the <strong>Validate and Submit</strong> button:</p>
+
+{% highlight javascript %}
+$('#employmentForm').formValidation({
+    button: {
+        selector: '#validateButton',
+        disabled: 'disabled'
+    }
+    ...
+});
+{% endhighlight %}
+
+                    {% include demo/tabs.html id="basic" frameworks="bootstrap" codes="programmatic" %}
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

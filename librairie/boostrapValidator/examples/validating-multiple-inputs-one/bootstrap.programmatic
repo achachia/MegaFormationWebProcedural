@@ -1,0 +1,94 @@
+<style type="text/css">
+/* There is no gutter between date, month and year fields */
+.row.no-gutter {
+    margin-left: 0;
+    margin-right: 0;
+}
+.row.no-gutter .form-control-feedback {
+    right: 0;
+}
+.row.no-gutter [class*='col-']:not(:first-child) input {
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.row.no-gutter [class*='col-']:not(:last-child) input {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.row.no-gutter [class*='col-']:not(:first-child),
+.row.no-gutter [class*='col-']:not(:last-child) {
+    padding-right: 0;
+    padding-left: 0;
+}
+</style>
+
+<form id="profileForm" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Birthday</label>
+        <div class="col-xs-9">
+            <div class="row no-gutter">
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" name="date" placeholder="Date" />
+                </div>
+
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" name="month" placeholder="Month" />
+                </div>
+
+                <div class="col-xs-4">
+                    <input type="text" class="form-control" name="year" placeholder="Year" />
+                </div>
+            </div>
+
+            <!-- Create a hidden field which is combined by 3 fields above -->
+            <input type="hidden" name="dob" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-5 col-xs-offset-3">
+            <button type="submit" class="btn btn-default">Validate</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#profileForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                dob: {
+                    excluded: false,    // Don't ignore me
+                    validators: {
+                        notEmpty: {
+                            message: 'Please fill out each field'
+                        },
+                        date: {
+                            format: 'YYYY.MM.DD',
+                            separator: '.',
+                            message: 'Please enter a valid date'
+                        }
+                    }
+                }
+            }
+        })
+        .on('keyup', 'input[name="date"], input[name="month"], input[name="year"]', function(e) {
+            var y = $('#profileForm').find('[name="year"]').val(),
+                m = $('#profileForm').find('[name="month"]').val(),
+                d = $('#profileForm').find('[name="date"]').val();
+
+            // Set the dob field value
+            $('#profileForm').find('[name="dob"]').val(y === '' || m === '' || d === '' ? '' : [y, m, d].join('.'));
+
+            // Revalidate it
+            $('#profileForm').formValidation('revalidateField', 'dob');
+        });
+});
+</script>

@@ -1,0 +1,86 @@
+---
+layout: default
+title: Validate a numeric number
+permalink: /validators/numeric/
+prev:
+    url: /validators/notEmpty/
+    title: notEmpty validator
+next:
+    url: /validators/phone/
+    title: phone validator
+related:
+    - digits
+    - integer
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>numeric validator</h1>
+        <p>Check if the value is numeric</p>
+        <p>&larr; <a href="/validators">Validators</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <h2>Options</h2>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Option</th>
+                                    <th>HTML attribute</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>separator</code></td>
+                                    <td><code>data-fv-numeric-separator</code></td>
+                                    <td>String</td>
+                                    <td>The decimal separator. Can be a dot (.) <span class="label label-default">default</span> or comma (,)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>message</code></td>
+                                    <td><code>data-fv-numeric-message</code></td>
+                                    <td>String</td>
+                                    <td>The error message</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="doc-alert doc-alert-info">
+                        When setting options via HTML attributes, remember to enable the validator by setting data-fv-numeric="true".<br/>
+                        You don't need to do that when<br/>
+                        i) using HTML 5 type="number" attribute,<br/>
+                        ii) and the step attribute must be specified which its value is not an integer
+                    </div>
+
+                    <div class="doc-alert doc-alert-info">
+                        The message and other options can be updated on the fly via the <a href="/api/#update-message">updateMessage()</a> and <a href="/api/#update-option">updateOption()</a> methods
+                    </div>
+
+                    <p>If you want the value to support custom format, such as a comma for thousand separator, you should use the <a href="/settings/#validator-transformer">transformer</a> option.
+                        The <a href="/examples/modifying-value-before-validating/">modifying the value before validating</a> example is good starting point.</p>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                {% include related.html %}
+
+                {% include pagination.html %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                <div id="toc" class="doc-toc"></div>
+
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

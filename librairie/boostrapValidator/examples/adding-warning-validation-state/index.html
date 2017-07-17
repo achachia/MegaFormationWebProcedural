@@ -1,0 +1,101 @@
+---
+layout: default
+title: Adding warning validation state
+permalink: /examples/adding-warning-validation-state/
+image: /examples/adding-warning-validation-state/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Adding warning validation state</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h3>Problem</h3>
+                <p>The form has an input field which is validated remotely using the <a href="/validators/remote/">remote</a> validator to check if it is available or not.
+                Having duplicate values is allowed. In this instance, it's still possible to submit the form. I just want to warn the user by adding the warning class (<code>has-warning</code>) provided by Bootstrap to the form group.
+                </p>
+
+                <h3>Solution</h3>
+                <p>Assume that the field name is <code>userName</code> and we use the remote validator to check its existence against the database.</p>
+                <p>In the case it is already taken in the database, we response an JSON encoded string of following object</p>
+
+{% highlight javascript %}
+{
+    valid: true,
+    message: 'The user name is already taken'
+    available: false
+}
+{% endhighlight %}
+
+                <p>The <code>message</code> property is used to shown in the form.</p>
+                <p>The <code>available</code> property is a custom property indicating the value is not available. We can reuse it later. Of course, you can change its name to other one to suit with your requirement.</p>
+
+                <p>Next, trigger the <code>success.validator.fv</code> and <code>err.validator.fv</code> <a href="/settings/#event-validator">events</a> to add (remove) <code>has-warning</code> to (from) the form group.</p>
+
+{% highlight javascript %}
+$(form)
+    .formValidation({
+        fields: {
+            userName: {
+                validators: {
+                    remote: {
+                        url: '/path/to/back-end/'
+                    }
+                }
+            }
+        }
+    })
+    // This event will be triggered when the field passes given validator
+    .on('success.validator.fv', function(e, data) {
+        // data.field     --> The field name
+        // data.element   --> The field element
+        // data.result    --> The result returned by the validator
+        // data.validator --> The validator name
+
+        if (data.field === 'userName'
+            && data.validator === 'remote'
+            && (data.result.available === false || data.result.available === 'false'))
+        {
+            // The userName field passes the remote validator
+            data.element                    // Get the field element
+                .closest('.form-group')     // Get the field parent
+
+                // Add has-warning class
+                .removeClass('has-success')
+                .addClass('has-warning')
+
+                // Show message
+                .find('small[data-fv-validator="remote"][data-fv-for="userName"]')
+                    .show();
+        }
+    })
+    // This event will be triggered when the field doesn't pass given validator
+    .on('err.validator.fv', function(e, data) {
+        // We need to remove has-warning class
+        // when the field doesn't pass any validator
+        if (data.field === 'userName') {
+            data.element
+                .closest('.form-group')
+                .removeClass('has-warning');
+        }
+    });
+{% endhighlight %}
+
+                <div class="doc-alert doc-alert-info">
+                    For testing purpose, the back-end always responses that the user name is not available no matter what you type in the field
+                </div>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+---
+layout: default
+title: Enabling the submit button
+permalink: /examples/enabling-submit-button/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Enabling the submit button</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <h2>Always enabling the submit button</h2>
+
+                    <p>By default, the submit buttons will be disabled if there is at least one invalid field.</p>
+                    <p>If you want to enable the submit buttons all the time, triggering the <a href="/settings#event-field">err.field.fv</a>, <a href="/settings#event-field">success.field.fv</a> event and using the <a href="/api#disable-submit-buttons">disableSubmitButtons()</a> method:</p>
+
+                    {% include demo/tabs.html id="always" frameworks="bootstrap" dir="always" codes="programmatic" %}
+
+                    <p>If you want the submit button to be enabled only after clicking it, use the <a href="/api#get-submit-button">getSubmitButton()</a> method to check whether or not the submit button is clicked:</p>
+
+{% highlight javascript  %}
+$(document).ready(function() {
+    $('#alwaysEnableButtonForm')
+        .formValidation({
+            ...
+        })
+        .on('err.field.fv', function(e, data) {
+            if (data.fv.getSubmitButton()) {
+                data.fv.disableSubmitButtons(false);
+            }
+        })
+        .on('success.field.fv', function(e, data) {
+            if (data.fv.getSubmitButton()) {
+                data.fv.disableSubmitButtons(false);
+            }
+        });
+});
+{% endhighlight %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Enabling the submit button when there is no invalid fields</h2>
+
+                    <p>The submit button is disabled initially. You want it to be enabled when there is at least one valid field and
+                    there is no invalid one.</p>
+                    <p>In this case, we can trigger the <a href="/settings#event-field">success.field.fv</a> event, which is called when the field is valid,
+                        and check if there is invalid field via the <a href="/api/#get-invalid-fields">getInvalidFields()</a> method.</p>
+
+                    {% include demo/tabs.html id="no-invalid" frameworks="bootstrap" dir="no-invalid" codes="programmatic" %}
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

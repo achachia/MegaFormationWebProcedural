@@ -1,0 +1,75 @@
+---
+layout: default
+title: Validating field with special name
+permalink: /examples/validating-field-special-name/
+image: /examples/validating-field-special-name/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Validating field with special name</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>When using FormValidation with some server-side frameworks such as <a href="http://cakephp.org/">CakePHP</a>,
+                    <a href="http://symfony.com/">Symfony</a>, <a href="http://rubyonrails.org/">Rails</a>,
+                    <a href="http://projects.spring.io/spring-framework/">Spring</a>, etc, there is a relationship between
+                    the model name and the <code>name</code> attribute of input.
+                </p>
+                <p>For example, assuming that an user is modeled by <code>User</code> class with <code>firstName</code>, <code>lastName</code>, <code>username</code>, <code>emails[]</code> properties.</p>
+                <p>Following the naming convention defined by these frameworks, the inputs in the form of adding new user might have the name attribute such as:</p>
+
+{% highlight html %}
+<input type="text" name="user[firstName]" />
+<input type="text" name="user[lastName]" />
+<input type="text" name="user[emails][]" />
+{% endhighlight %}
+
+                <p>or</p>
+
+{% highlight html %}
+<input type="text" name="user.lastName" />
+<input type="text" name="user.firstName" />
+<input type="text" name="user.emails[]" />
+{% endhighlight %}
+
+                <p>When using FormValidation to validate these kind of fields, you must wrap the field name between single or double quote as following:</p>
+
+{% highlight javascript %}
+$(form).formValidation({
+    framework: 'bootstrap',
+    fields: {
+        'user[firstName]': {
+            validators: {
+                ...
+            }
+        },
+        'user[lastName]': {
+            validators: {
+                ...
+            }
+        },
+        'user[emails][]': {
+            validators: {
+                ...
+            }
+        }
+    }
+});
+{% endhighlight %}
+
+                <p>Below is a sample example:</p>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

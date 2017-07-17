@@ -1,0 +1,119 @@
+---
+layout: default
+title: Playing with HTML 5 input types and attributes
+permalink: /examples/html5/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Playing with HTML 5 input types and attributes</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>FormValidation supports a few of HTML 5 types, attributes listed as following:</p>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>HTML 5 attribute</th>
+                                <th>Equivalent validator</th>
+                                <th>Equivalent HTML attribute</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>min="..."</code></td>
+                                <td><a href="/validators/greaterThan/">greaterThan</a> validator</td>
+                                <td>
+{% highlight html %}
+data-fv-greaterthan="true"
+data-fv-greaterthan-value="..."
+{% endhighlight %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>max="..."</code></td>
+                                <td><a href="/validators/lessThan/">lessThan</a> validator</td>
+                                <td>
+{% highlight html %}
+data-fv-lessthan="true"
+data-fv-lessthan-value="..."
+{% endhighlight %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>maxlength="..."</code>, <code>minlength="..."</code></td>
+                                <td><a href="/validators/stringLength/">stringLength</a> validator</td>
+                                <td>
+{% highlight html %}
+data-fv-stringlength="true"
+data-fv-stringlength-max="..."
+data-fv-stringlength-min="..."
+{% endhighlight %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>pattern="..."</code></td>
+                                <td><a href="/validators/regexp/">regexp</a> validator</td>
+                                <td>
+{% highlight html %}
+data-fv-regexp="true"
+data-fv-regexp-regexp="..."
+{% endhighlight %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>required</code></td>
+                                <td><a href="/validators/notEmpty/">notEmpty</a> validator</td>
+                                <td><code>data-fv-notempty="true"</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>type="color"</code></td>
+                                <td><a href="/validators/color/">color</a> validator</td>
+                                <td><code>data-fv-hexcolor="true"</code></td>
+                            </tr>
+                            <tr>
+                                <td><code>type="email"</code></td>
+                                <td><a href="/validators/emailAddress/">emailAddress</a> validator</td>
+                                <td><code>data-fv-emailaddress="true"</code></td>
+                            </tr>
+                            <tr>
+                                <td>
+{% highlight html %}
+type="range"
+min="..."
+max="..."
+{% endhighlight %}
+                                </td>
+                                <td><a href="/validators/between/">between</a> validator</td>
+                                <td>
+{% highlight html %}
+data-fv-between="true"
+data-fv-between-min="..."
+data-fv-between-max="..."
+{% endhighlight %}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><code>type="url"</code></td>
+                                <td><a href="/validators/uri/">uri</a> validator</td>
+                                <td><code>data-fv-uri="true"</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

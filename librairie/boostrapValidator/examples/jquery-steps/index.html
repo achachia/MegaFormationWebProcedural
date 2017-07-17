@@ -1,0 +1,53 @@
+---
+layout: default
+title: Playing with jQuery Steps
+permalink: /examples/jquery-steps/
+image: /examples/jquery-steps/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Playing with jQuery Steps</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>The following example shows an usage of FormValidation to validate tabs structured by <a href="http://www.jquery-steps.com/">jQuery Steps</a>.</p>
+
+                <div class="doc-alert doc-alert-info">
+                    You should look at the <a href="/examples#wizard">wizard</a> section when integrating FormValidation with wizard-like components
+                </div>
+
+                <p>The CSS provided by jQuery Steps set the <code>min-height: 35em</code> for the main content. In order to adjust the
+                height of container to fit the content, we can override it easily as following:</p>
+
+{% highlight css %}
+.wizard .content {
+    min-height: 100px;
+}
+.wizard .content > .body {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+    position: relative;
+}
+{% endhighlight %}
+
+                <p>When clicking the Previous, Next, Finish button, we need to validate the current step area. It can be done by calling the <a href="/api/#validate-container">validateContainer()</a> method when
+                <code>onStepChanging</code>, <code>onFinishing</code> <a href="https://github.com/rstaib/jquery-steps/wiki/Settings#events">events</a> are triggered.</p>
+                <p>We then prevent the wizard from jumping to the next or previous step if the container is not valid.</p>
+
+                <p>Below is the working example:</p>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

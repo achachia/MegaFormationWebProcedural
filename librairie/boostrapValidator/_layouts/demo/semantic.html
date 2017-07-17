@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article#">
+    {% include demo/head.html %}
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/semantic-ui/1.2.0/semantic.min.css">
+    <link rel="stylesheet" href="/vendor/formvalidation/css/formValidation.min.css">
+    <link rel="stylesheet" href="/asset/css/demo.css">
+
+    <script src="//cdn.jsdelivr.net/semantic-ui/1.2.0/semantic.min.js"></script>
+    <script src="/vendor/formvalidation/js/formValidation.min.js"></script>
+    <script src="/vendor/formvalidation/js/framework/semantic.min.js"></script>
+</head>
+<body class="demo-semantic">
+    <div class="ui grid" id="demoContainer">
+        <div class="twelve wide column">
+            {{ content }}
+        </div>
+
+        <div class="four wide column">
+            <div class="demo-ad">{% include ad.html %}</div>
+        </div>
+    </div>
+
+<script>
+$(document).ready(function() {
+    // Use checkbox element
+    // http://semantic-ui.com/modules/checkbox.html
+    $('.ui.checkbox').checkbox();
+});
+{% include demo/foot.js %}
+</script>
+</body>
+</html>

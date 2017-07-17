@@ -1,0 +1,43 @@
+---
+layout: default
+title: Getting Started
+permalink: /getting-started/
+prev:
+    url: /download/
+    title: Download
+next:
+    url: /settings/
+    title: Settings
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Getting Started</h1>
+        <p>Getting used with FormValidation</p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                {% include_relative _whatIncluded.html %}
+
+                <div class="doc-hr"></div>
+
+                {% include_relative _usage.html %}
+
+                <div class="doc-hr"></div>
+
+                {% include_relative _example.html %}
+
+                {% include pagination.html %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                <div id="toc" class="doc-toc"></div>
+
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

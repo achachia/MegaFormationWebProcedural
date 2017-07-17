@@ -1,0 +1,95 @@
+---
+layout: default
+title: Using Mailgun API to validate email address
+permalink: /examples/using-mailgun-api-validate-email-address/
+image: /examples/using-mailgun-api-validate-email-address/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Using Mailgun API to validate email address</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p><a href="http://www.mailgun.com/">Mailgun</a> is one of most popular email services. It also provides free API to validate an email address based on:</p>
+                <ul class="doc-list">
+                    <li>Syntax checks</li>
+                    <li>DNS validation</li>
+                    <li>Spell checks</li>
+                    <li>Email Service Provider (ESP)</li>
+                </ul>
+
+                <p>The following example shows how to use the <a href="/validators/emailAddress/">emailAddress</a> validator to validate email address in the client side first. And then use the <a href="/validators/remote/">remote</a> validator to connect with Mailgun validation API.</p>
+                <p>To use it, you need to <a href="https://mailgun.com/signup">sign up</a> for a Mailgun account and get a free API key.</p>
+
+                <div class="doc-alert doc-alert-info">
+                    The crossDomain, dataType, validKey options of the <a href="/validators/remote/">remote</a> validator used in the example are only available from v0.6.1
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Email address</th>
+                                <th>Description</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><a href="javascript: void(0);" class="mailGunSample">john@gmail.com</a></td>
+                                <td>Does not meet Gmail minimum local-part length of 6 characters</td>
+                                <td><i class="fa"></i></td>
+                            </tr>
+                            <tr>
+                                <td><a href="javascript: void(0);" class="mailGunSample">john.smith@gmaill.com</a></td>
+                                <td>Invalid, because gmaill.com does not have valid MX records</td>
+                                <td><i class="fa"></i></td>
+                            </tr>
+                            <tr>
+                                <td><a href="javascript: void(0);" class="mailGunSample">john@microsoft.io</a></td>
+                                <td>Invalid because while microsoft.io does not have any MX records, it does have fallback A records, but alas no Mail Exchanger responds</td>
+                                <td><i class="fa"></i></td>
+                            </tr>
+                            <tr>
+                                <td><a href="javascript: void(0);" class="mailGunSample">john.smith@gmail.com</a></td>
+                                <td>Meets Gmail 6 character minimum and all other requirements</td>
+                                <td><i class="fa"></i></td>
+                            </tr>
+                            <tr>
+                                <td><a href="javascript: void(0);" class="mailGunSample">"hello world"@domain.com</a></td>
+                                <td>Meets pure syntax checks</td>
+                                <td><i class="fa"></i></td>
+                            </tr>
+                            <tr>
+                                <td><a href="javascript: void(0);" class="mailGunSample">hello@gail.com</a></td>
+                                <td>Suggest new email address</td>
+                                <td><i class="fa"></i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                {% include demo/tabs.html id="mailgun" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('.mailGunSample').on('click', function() {
+        var formWindow = $('#mailgun-frame').get(0).contentWindow,
+            $icon      = $(this).parents('tr').find('i');
+        formWindow.revalidateEmailAddress($(this).text(), $icon);
+    });
+});
+</script>

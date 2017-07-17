@@ -1,0 +1,92 @@
+<form id="paymentForm" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Expiration</label>
+        <div class="col-xs-3">
+            <input type="text" class="form-control" placeholder="Month" name="expMonth" />
+        </div>
+        <div class="col-xs-3">
+            <input type="text" class="form-control" placeholder="Year" name="expYear" />
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#paymentForm').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            expMonth: {
+                row: '.col-xs-3',
+                validators: {
+                    notEmpty: {
+                        message: 'The expiration month is required'
+                    },
+                    digits: {
+                        message: 'The expiration month can contain digits only'
+                    },
+                    callback: {
+                        message: 'Expired',
+                        callback: function(value, validator, $field) {
+                            value = parseInt(value, 10);
+                            var year         = validator.getFieldElements('expYear').val(),
+                                currentMonth = new Date().getMonth() + 1,
+                                currentYear  = new Date().getFullYear();
+                            if (value < 0 || value > 12) {
+                                return false;
+                            }
+                            if (year == '') {
+                                return true;
+                            }
+                            year = parseInt(year, 10);
+                            if (year > currentYear || (year == currentYear && value >= currentMonth)) {
+                                validator.updateStatus('expYear', 'VALID');
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            },
+            expYear: {
+                row: '.col-xs-3',
+                validators: {
+                    notEmpty: {
+                        message: 'The expiration year is required'
+                    },
+                    digits: {
+                        message: 'The expiration year can contain digits only'
+                    },
+                    callback: {
+                        message: 'Expired',
+                        callback: function(value, validator, $field) {
+                            value = parseInt(value, 10);
+                            var month        = validator.getFieldElements('expMonth').val(),
+                                currentMonth = new Date().getMonth() + 1,
+                                currentYear  = new Date().getFullYear();
+                            if (value < currentYear || value > currentYear + 10) {
+                                return false;
+                            }
+                            if (month == '') {
+                                return false;
+                            }
+                            month = parseInt(month, 10);
+                            if (value > currentYear || (value == currentYear && month >= currentMonth)) {
+                                validator.updateStatus('expMonth', 'VALID');
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

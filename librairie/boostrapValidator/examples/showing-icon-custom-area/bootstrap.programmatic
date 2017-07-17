@@ -1,0 +1,75 @@
+<style type="text/css">
+/* Custom the feedback icon styles */
+#registerForm .form-control-feedback {
+    position: static;
+    display: inline-block;
+}
+</style>
+
+<form id="registerForm">
+    <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" name="username" />
+    </div>
+
+    <div class="form-group">
+        <label>Email address</label>
+        <input type="text" class="form-control" name="email" />
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#registerForm')
+        // IMPORTANT: on('init.field.fv') must be declared
+        // before calling .formValidation(...)
+        .on('init.field.fv', function(e, data) {
+            // $(e.target)  --> The field element
+            // data.fv      --> The FormValidation instance
+            // data.field   --> The field name
+            // data.element --> The field element
+            var $parent = data.element.parents('.form-group'),
+                $icon   = data.element.data('fv.icon'),
+                $label  = $parent.find('label');
+
+            // Place the icon right after the label
+            $icon.insertAfter($label);
+        })
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                username: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The username is required and cannot be empty'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 30,
+                            message: 'The username must be more than 6 and less than 30 characters long'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_]+$/,
+                            message: 'The username can only consist of alphabetical, number and underscore'
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The email is required and cannot be empty'
+                        },
+                        emailAddress: {
+                            message: 'The input is not a valid email address'
+                        }
+                    }
+                }
+            }
+        });
+});
+</script>

@@ -1,0 +1,29 @@
+- title: "New example: Adding fields with different names"
+  url: "/examples/adding-dynamic-field/#adding-fields-with-different-names"
+
+- title: "New example: Asking credit card number to match with selected type"
+  url: "/validators/creditCard/#asking-credit-card-number-to-match-with-selected-type"
+
+- title: "New example: Validating start and end dates"
+  url: "/examples/bootstrap-datepicker/#start-and-end-dates"
+
+- title: "New example: Validating credit card expiration date"
+  url: "/examples/validating-credit-card-expiration-date/"
+
+- title: "New example: Supporting Skeleton framework"
+  url: "/examples/supporting-skeleton-framework/"
+
+- title: "New example: Getting notified while field is being validated"
+  url: "/examples/getting-notified-field-being-validated/"
+
+- title: "New promise validator"
+  url: "/validators/promise/"
+
+- title: "New i18n add-on: Support multiple languages"
+  url: "/addons/i18n/"
+
+- title: "New example: Playing with selectize"
+  url: "/examples/selectize/"
+
+- title: "v0.6.2 is released on 2015.04.02"
+  url: "/news/v0.6.2-released/"

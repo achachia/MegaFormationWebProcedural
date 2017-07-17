@@ -1,0 +1,96 @@
+---
+layout: default
+title: Playing with Bootstrap Tabs
+permalink: /examples/bootstrap-tab/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Playing with Bootstrap Tabs</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>The following example shows that the plugin works perfectly with <a href="http://getbootstrap.com/javascript/#tabs">Bootstrap Tabs</a>.</p>
+
+                <div class="doc-alert doc-alert-info">
+                    If you are thinking about the form wizard, look at some <a href="/examples/#wizard">wizard</a> examples
+                </div>
+
+                <p>By default, the fields in inactive tabs will not be validated because they are not visible. In order to validate them, we need to use the <a href="/settings#form-excluded">excluded</a> option:</p>
+
+{% highlight javascript %}
+excluded: [':disabled']
+{% endhighlight %}
+
+                <div class="doc-alert doc-alert-info">
+                    You should look at the <a href="/examples#compatibility">basic principles</a> when integrating FormValidation with other plugins
+                </div>
+
+                <p>Assume that you want to add an icon to tab to indicate the valid or invalid tab. A tab is called valid if all fields inside it are valid. Otherwise, if there is at least one invalid field inside tab, the tab is invalid.</p>
+                <p>Firstly, we need to prepare the icon placed at the tab title:</p>
+
+{% highlight html %}
+<ul class="nav nav-tabs">
+    <li class="active"><a href="#info-tab" data-toggle="tab">Tab title <i class="fa"></i></a></li>
+    <li><a href="#address-tab" data-toggle="tab">Tab title <i class="fa"></i></a></li>
+</ul>
+{% endhighlight %}
+
+                <p>Lastly, add success/error class to icon when the field is valid/invalid by triggering the <code>err.field.fv</code> and <code>success.field.fv</code> <a href="/settings#event-field">events</a>:</p>
+
+{% highlight javascript %}
+$(document).ready(function() {
+    $('#accountForm')
+        .formValidation({
+            excluded: [':disabled'],
+            ...
+        })
+
+        // Called when a field is invalid
+        .on('err.field.fv', function(e, data) {
+            // data.element --> The field element
+
+            var $tabPane = data.element.parents('.tab-pane'),
+                tabId    = $tabPane.attr('id');
+
+            $('a[href="#' + tabId + '"][data-toggle="tab"]')
+                .parent()
+                .find('i')
+                .removeClass('fa-check')
+                .addClass('fa-times');
+        })
+
+        // Called when a field is valid
+        .on('success.field.fv', function(e, data) {
+            // data.fv      --> The FormValidation instance
+            // data.element --> The field element
+
+            var $tabPane = data.element.parents('.tab-pane'),
+                tabId    = $tabPane.attr('id'),
+                $icon    = $('a[href="#' + tabId + '"][data-toggle="tab"]')
+                            .parent()
+                            .find('i')
+                            .removeClass('fa-check fa-times');
+
+            // Check if all fields in tab are valid
+            var isValidTab = data.fv.isValidContainer($tabPane);
+            if (isValidTab !== null) {
+                $icon.addClass(isValidTab ? 'fa-check' : 'fa-times');
+            }
+        });
+});
+{% endhighlight %}
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

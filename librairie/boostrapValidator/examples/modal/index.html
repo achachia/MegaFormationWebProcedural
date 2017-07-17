@@ -1,0 +1,129 @@
+---
+layout: default
+title: Validating a form placed inside a Bootstrap modal
+permalink: /examples/modal/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Validating a form placed inside a Bootstrap modal</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <p>It's possible to use the plugin with a form which is placed inside a <a href="http://getbootstrap.com/javascript/#modals">Bootstrap Modal</a>.</p>
+
+                    <div class="doc-demo">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#modal-form-tab" data-toggle="tab">Try it</a></li>
+                            <li><a href="#modal-programmatic-tab" data-toggle="tab">Programmatic code</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="modal-form-tab">
+                                {% include_relative bootstrap.markup %}
+                            </div>
+
+                            <div class="tab-pane" id="modal-programmatic-tab">
+{% highlight html %}
+{% include_relative bootstrap.markup %}
+
+{% include_relative bootstrap.programmatic %}
+{% endhighlight %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Setting options via HTML attributes</h2>
+
+                    <p>If you use <a href="/examples/attribute/">HTML attributes</a> to set the validator options, or <a href="/examples/html5/">HTML5 input</a> elements, you must set <code>excluded: [':disabled']</code>.</p>
+                    <p>By default, the plugin will not initialize the fields which are disabled, hidden, or not visible. Since the form is placed inside a model which is not visible after loading page, the fields/validators initialized with HTML attributes might be ignored.</p>
+                    <p>That's the reason why we need to set <code>excluded: [':disabled']</code>. Take a look at the <a href="/settings#form-excluded">excluded</a> setting for more information.</p>
+
+{% highlight javascript %}
+$(document).ready(function() {
+    $('#loginForm').formValidation({
+        message: 'This value is not valid',
+        excluded: [':disabled'],
+        ...
+    });
+});
+{% endhighlight %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Resetting form when showing the modal</h2>
+
+                    <p>If you want to reset all the fields in form whenever the modal is shown, the <a href="/api#reset-form"><code>resetForm()</code> method</a> will help you:</p>
+{% highlight javascript %}
+$('#loginModal').on('shown.bs.modal', function() {
+    $('#loginForm').formValidation('resetForm', true);
+});
+{% endhighlight %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Related examples</h2>
+                    <ul class="doc-list">
+                        <li><a href="/examples/bootbox/">Playing with Bootbox</a></li>
+                        <li><a href="/examples/loading-saving-data-modal/">Loading and saving data in a modal</a></li>
+                    </ul>
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="Welcome back" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4>Welcome back, <span class="username"></span></h4>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include_relative bootstrap.programmatic %}
+<script>
+$(document).ready(function() {
+    $('#loginForm').on('success.form.fv', function(e) {
+        // Prevent form submission
+        e.preventDefault();
+
+        var validator = $(e.target).data('formValidation');
+        $('#loginModal')
+            .one('hidden.bs.modal', function() {
+                $('#welcomeModal')
+                    .find('.username')
+                        .html(validator.getFieldElements('username').val()).end()
+                    .modal('show');
+            })
+            .modal('hide');
+    });
+
+    $('#loginModal').on('shown.bs.modal', function() {
+        $('#loginForm').formValidation('resetForm', true)
+                       .find('[name="username"]').focus();
+    });
+});
+</script>

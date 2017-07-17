@@ -1,0 +1,28 @@
+---
+layout: default
+title: Changing the tooltip position
+permalink: /examples/changing-tooltip-position/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Changing the tooltip position</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>When you choose to use Bootstrap <a href="http://getbootstrap.com/javascript/#tooltips">Tooltip</a> or <a href="http://getbootstrap.com/javascript/#popovers">Popover</a> as <a href="/settings#form-err-container">container</a>, all tooltips/popovers will be shown positioned to the top, but you can change their position by triggering the <a href="/settings#event-field">err.field.fv</a> event.</p>
+                <p>The following form uses <a href="http://getbootstrap.com/javascript/#tooltips">Bootstrap Tooltip</a>, positioned to the right, to show the error message.</p>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

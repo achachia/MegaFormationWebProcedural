@@ -1,0 +1,48 @@
+---
+layout: default
+title: Validating array of inputs
+permalink: /examples/validating-array-inputs/
+image: /examples/validating-array-inputs/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Validating array of inputs</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <h2>Inputs with same names</h2>
+
+                    <p>It's possible to validate multiple fields with the same name. The fields can be radio buttons, checkboxes or text boxes, etc.</p>
+
+                    {% include demo/tabs.html id="same-name" frameworks="bootstrap" dir="same-name" codes="programmatic" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Inputs with different names</h2>
+
+                    <p>In some server-side frameworks, there is relationship between the model layer and the name of inputs. The following form demonstrates a way of modelling and naming convention of inputs</p>
+                    <p>For instance, a person profile might include the information of children. Each child has basic information such as full name and date of birth.</p>
+                    <p>The <strong>Full name</strong> and <strong>Date of birth</strong> inputs are named as <code>child[i].fullName</code>, <code>child[i].birthday</code> respectively, where <code>i</code> can be 0, 1, ..., 4.
+                        These fields have different names but have the same set of validation rules. In this case, we can use the <a href="/settings/#field-selector">selector</a> options to define the validators for list of fields having the same CSS selector.
+                    </p>
+
+                    {% include demo/tabs.html id="different-name" frameworks="bootstrap" dir="different-name" codes="programmatic" %}
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                <div id="toc" class="doc-toc"></div>
+
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

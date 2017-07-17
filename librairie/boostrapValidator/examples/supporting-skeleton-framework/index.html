@@ -1,0 +1,102 @@
+---
+layout: default
+title: Supporting Skeleton framework
+permalink: /examples/supporting-skeleton-framework/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Supporting Skeleton framework</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>Below is a step by step instruction showing how to validate the forms which uses the <a href="http://getskeleton.com/">Skeleton</a> framework.</p>
+
+                <section>
+                    <h2>Downloading the files</h2>
+
+                    <ul class="doc-list">
+                        <li>Create a file named <code>skeleton.js</code> with the following content:</li>
+                    </ul>
+
+{% highlight javascript %}
+{% include framework/skeleton/skeleton.js %}
+{% endhighlight %}
+
+                    <ul class="doc-list">
+                        <li>Create a file named <code>skeleton.css</code> with the following content:</li>
+                    </ul>
+
+{% highlight javascript %}
+{% include framework/skeleton/skeleton.css %}
+{% endhighlight %}
+
+                    <p>You should place <code>skeleton.js</code> and <code>skeleton.css</code> in <code>formvalidation/dist/js/framework</code> and <code>formvalidation/dist/css/skeleton.css</code> respectively.</p>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Including the library</h2>
+
+{% highlight html %}
+<!-- Skeleton framework -->
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+
+<!-- Optional: Include the Font Awesome for using some icons -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+
+<!-- FormValidation CSS file -->
+<link rel="stylesheet" href="/vendor/formvalidation/dist/css/formValidation.min.css">
+<link rel="stylesheet" href="/vendor/formvalidation/dist/css/skeleton.css">
+
+<!-- jQuery v1.9.1 or higher -->
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+
+<!-- FormValidation plugin and the class supports validating Skeleton form -->
+<script src="/vendor/formvalidation/dist/js/formValidation.min.js"></script>
+<script src="/vendor/formvalidation/dist/js/framework/skeleton.js"></script>
+{% endhighlight %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Calling the plugin</h2>
+
+                    <p>When calling <code>.formValidation()</code>, you need to set the <a href="/settings/#form-framework">framework</a> option:</p>
+
+{% highlight javascript %}
+$(form).formValidation({
+    framework: 'skeleton',
+    ...
+});
+{% endhighlight %}
+
+                    <div class="doc-alert doc-alert-info">
+                        Some of forms use the <a href="/settings/#form-row-selector">row</a> option to support multiple fields in the same row container
+                    </div>
+
+                    <h3>Stacked form</h3>
+                    {% include demo/tabs.html id="stacked-form" frameworks="skeleton" dir="stacked-form" codes="programmatic" %}
+
+                    <h3>Stacked form without labels</h3>
+                    {% include demo/tabs.html id="no-label-form" frameworks="skeleton" dir="no-label-form" codes="programmatic" %}
+
+                    <h3>Horizontal form</h3>
+                    {% include demo/tabs.html id="horizontal-form" frameworks="skeleton" dir="horizontal-form" codes="programmatic" %}
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                <div id="toc" class="doc-toc"></div>
+
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,160 @@
+<form id="registrationForm" class="fv-form-horizontal">
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Full name</label>
+        </div>
+        <div class="small-9 columns">
+            <div class="row">
+                <div class="small-6 columns">
+                    <input type="text" name="firstName" placeholder="First name" />
+                </div>
+
+                <div class="small-6 columns">
+                    <input type="text" name="lastName" placeholder="Last name" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Username</label>
+        </div>
+        <div class="small-6 small-pull-3 columns">
+            <input type="text" name="username" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Email address</label>
+        </div>
+        <div class="small-6 small-pull-3 columns">
+            <input type="text" name="email" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Password</label>
+        </div>
+        <div class="small-6 small-pull-3 columns">
+            <input type="password" name="password" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Gender</label>
+        </div>
+        <div class="small-6 small-pull-3 columns">
+            <input type="radio" name="gender" value="male" /><label>Male</label>
+            <input type="radio" name="gender" value="female" /><label>Female</label>
+            <input type="radio" name="gender" value="other" /><label>Other</label>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-3 columns">
+            <label class="right">Date of birth</label>
+        </div>
+        <div class="small-4 small-pull-5 columns">
+            <input type="text" name="birthday" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-9 small-push-3 columns">
+            <button type="submit" class="button" name="signup" value="Sign up">Submit</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#registrationForm').formValidation({
+        framework: 'foundation',
+        icon: {
+            valid: 'fa fa-check',
+            invalid: 'fa fa-times',
+            validating: 'fa fa-refresh'
+        },
+        err: {
+            container: 'tooltip'
+        },
+        fields: {
+            firstName: {
+                row: '.small-6',
+                validators: {
+                    notEmpty: {
+                        message: 'The first name is required'
+                    }
+                }
+            },
+            lastName: {
+                row: '.small-6',
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required'
+                    }
+                }
+            },
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password cannot be the same as username'
+                    }
+                }
+            },
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'The gender is required'
+                    }
+                }
+            },
+            birthday: {
+                validators: {
+                    notEmpty: {
+                        message: 'The date of birth is required'
+                    },
+                    date: {
+                        format: 'YYYY/MM/DD',
+                        message: 'The date of birth is not valid'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

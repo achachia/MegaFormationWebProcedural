@@ -1,0 +1,105 @@
+---
+layout: default
+title: Playing with geocomplete
+permalink: /examples/geocomplete/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Playing with geocomplete</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p><a href="http://ubilabs.github.io/geocomplete/">geocomplete</a> is a popular jQuery plugin wrapping Google Maps API's
+                    <a href="https://code.google.com/apis/maps/documentation/javascript/geocoding.html">Geocoding</a> and
+                    <a href="https://code.google.com/apis/maps/documentation/javascript/places.html#places_autocomplete">Places Autocomplete</a> services.
+                    It allows us to choose an address from autocomplete dropdown list while searching for a location.
+                </p>
+
+                <p>The following example demonstrates how to use FormValidation with the geocomplete plugin. It requires user to fill in an address which can be chosen from the autocomplete list.
+                    If user enter a straight text that isn't found after looking by the Google Map API's, the address will be treated as invalid one.</p>
+
+                <div class="doc-alert doc-alert-info">
+                    You should look at the <a href="/examples#compatibility">basic principles</a> when integrating FormValidation with other plugins
+                </div>
+
+                <p>A particular address is defined by a latitude and longitude coordinates:</p>
+                <ul class="doc-list">
+                    <li>Both value must be the number</li>
+                    <li>The latitude must be between -90 and 90</li>
+                    <li>The longitude must be between -180 and 180</li>
+                </ul>
+
+                <p>geocomplete provides the ability of populating these coordinates after selecting the address from the list.
+                    Then we can use these values to validate the address via the <a href="/validators/callback/">callback</a> validator:</p>
+
+{% highlight javascript %}
+$('#addressForm').formValidation({
+    fields: {
+        address: {
+            trigger: 'blur',
+            validators: {
+                callback: {
+                    callback: function(value, validator, $field) {
+                        var lat = $('#addressForm').find('[name="lat"]').val(),
+                            lng = $('#addressForm').find('[name="lng"]').val();
+                        return $.isNumeric(lat) && $.isNumeric(lng)
+                                && (-90 <= lat) && (lat <= 90)
+                                && (-180 <= lng) && (lng <= 180);
+                    }
+                }
+            }
+        }
+    }
+});
+{% endhighlight %}
+
+                <p>When user enter a a straight text, we need to reset the latitude, longitude values and mark the field as not validated yet via the <a href="//api/#update-status">updateStatus()</a> method:</p>
+
+{% highlight javascript %}
+$('#addressForm')
+    .find('[name="address"]')
+        .on('input keyup', function(e) {
+            // Reset lat, lng
+            $('#addressForm')
+                .formValidation('updateStatus', 'address', 'NOT_VALIDATED')
+                .find('[name="lat"], [name="lng"]').val('').end();
+        });
+{% endhighlight %}
+
+                <p>Below is live demonstration which you can play with:</p>
+
+                <div class="doc-demo">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#pickadate-form-tab" data-toggle="tab">Try it</a></li>
+                        <li><a href="#pickadate-programmatic-tab" data-toggle="tab">Programmatic code</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="pickadate-form-tab">
+                            {% include_relative bootstrap.markup %}
+                        </div>
+
+                        <div class="tab-pane" id="pickadate-programmatic-tab">
+{% highlight html %}
+{% include_relative bootstrap.markup %}
+
+{% include_relative bootstrap.programmatic %}
+{% endhighlight %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% include_relative bootstrap.programmatic %}

@@ -1,0 +1,46 @@
+<form id="productForm" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Price</label>
+        <div class="col-xs-4">
+            <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input type="text" class="form-control" name="price" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-6 col-xs-offset-3">
+            <button type="submit" class="btn btn-default">Validate</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#productForm').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            price: {
+                validators: {
+                    notEmpty: {
+                        message: 'The price is required'
+                    },
+                    numeric: {
+                        message: 'The price must be a number',
+                        transformer: function($field, validatorName, validator) {
+                            var value = $field.val();
+                            return value.replace(',', '');
+                        }
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

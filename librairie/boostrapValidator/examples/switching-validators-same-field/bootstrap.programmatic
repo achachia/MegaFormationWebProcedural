@@ -1,0 +1,72 @@
+<form id="profileForm" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-5 control-label">Brazilian ID or VAT number</label>
+        <div class="col-xs-5">
+            <input type="text" class="form-control" name="yourId" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-5 col-xs-offset-5">
+            <button type="submit" class="btn btn-default">Validate</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#profileForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                yourId: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The ID is required and cannot be empty'
+                        },
+                        id: {
+                            // The id validator is enabled by default
+                            enabled: true,
+                            country: 'BR',
+                            message: 'Please enter a valid Brazilian ID number'
+                        },
+                        vat: {
+                            // The vat validator is disabled initially
+                            enabled: false,
+                            country: 'BR',
+                            message: 'Please enter a valid Brazilian VAT number'
+                        }
+                    }
+                }
+            }
+        })
+        .on('input keyup', '[name="yourId"]', function() {
+            switch ($(this).val().length) {
+                // User is trying to put a VAT number
+                case 14:
+                    $('#profileForm')
+                        // Disable the id validator
+                        .formValidation('enableFieldValidators', 'yourId', false, 'id')
+                        // Enable the vat one
+                        .formValidation('enableFieldValidators', 'yourId', true, 'vat')
+                        // Revalidate field
+                        .formValidation('revalidateField', 'yourId');
+                    break;
+
+                // User is trying to put an ID number
+                case 11:
+                default:
+                    $('#profileForm')
+                        .formValidation('enableFieldValidators', 'yourId', true, 'id')
+                        .formValidation('enableFieldValidators', 'yourId', false, 'vat')
+                        .formValidation('revalidateField', 'yourId');
+                    break;
+            }
+        });
+});
+</script>

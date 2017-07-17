@@ -1,0 +1,89 @@
+---
+layout: default
+title: Validating multiple inputs as one
+permalink: /examples/validating-multiple-inputs-one/
+image: /examples/validating-multiple-inputs-one/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Validating multiple inputs as one</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>In some cases, you need to validate a value which is combined by various fields.
+                    For instance, a Birthday field might be a combination of Date, Month and Year one.</p>
+                <p>This example show a way to deal with these cases. The following form requires all of Date, Month and Year fields. Also, the combination of them must be a valid date.</p>
+
+                <p>The approach is quite simple:</p>
+
+                <ul class="doc-list">
+                    <li>
+                        <p>First, we need to create a hidden field that its value is generated from Date, Month and Year fields.</p>
+                    </li>
+                </ul>
+
+{% highlight html %}
+<input type="hidden" name="dob" />
+{% endhighlight %}
+
+                <ul class="doc-list">
+                    <li>
+                        <p>By default, FormValidation will <a href="/settings/#form-excluded">ignore</a> the hidden field. In order to apply the <a href="/validators/notEmpty/">notEmpty</a> and <a href="/validators/date/">date</a>
+                        validators for it, we need to use the <a href="/settings/#field-excluded">excluded</a> option:
+                        </p>
+                    </li>
+                </ul>
+
+{% highlight javascript %}
+$('#profileForm').formValidation({
+    framework: 'bootstrap',
+    fields: {
+        dob: {
+            excluded: false,    // Don't ignore me
+            validators: {
+                notEmpty: {
+                    ...
+                },
+                date: {
+                    ...
+                }
+            }
+        }
+    }
+});
+{% endhighlight %}
+
+                <ul class="doc-list">
+                    <li>Finally, when any of Date, Month and Year fields changes its value, we need to update the hidden field value and revalidate it using the <a href="/api/#revalidate-field">revalidateField()</a> method:</li>
+                </ul>
+
+{% highlight javascript %}
+$('#profileForm').on('keyup', 'input[name="date"], input[name="month"], input[name="year"]', function(e) {
+    var y = $('#profileForm').find('[name="year"]').val(),
+        m = $('#profileForm').find('[name="month"]').val(),
+        d = $('#profileForm').find('[name="date"]').val();
+
+    // Set the dob field value
+    $('#profileForm').find('[name="dob"]').val(y === '' || m === '' || d === '' ? '' : [y, m, d].join('.'));
+
+    // Revalidate it
+    $('#profileForm').formValidation('revalidateField', 'dob');
+});
+{% endhighlight %}
+
+                <p>Here is the working example:</p>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

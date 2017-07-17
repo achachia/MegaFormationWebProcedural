@@ -1,0 +1,94 @@
+<form id="profileForm" method="post">
+    <p>Please provide one of these information:</p>
+
+    <div class="form-group">
+        <label class="control-label">Social Security Number</label>
+        <input type="text" class="form-control" name="ssn" />
+    </div>
+
+    <div class="form-group text-center">&mdash; Or &mdash;</div>
+
+    <div class="form-group">
+        <label class="control-label">Driver's License Number</label>
+        <input type="text" class="form-control" name="driverLicense" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#profileForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                ssn: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please provide the Social Security number'
+                        },
+                        regexp: {
+                            regexp: /^(?!(000|666|9))\d{3}(?!00)\d{2}(?!0000)\d{4}$/,
+                            message: 'The format of your SSN is invalid. It should be XXXXXXXXX with no dashes'
+                        }
+                    }
+                },
+                driverLicense: {
+                    // Disable validators
+                    enabled: false,
+                    validators: {
+                        notEmpty: {
+                            message: 'Or the Drivers License number'
+                        },
+                        stringLength: {
+                            min: 8,
+                            max: 20,
+                            message: 'The Drivers License number must be more than 8 and less than 20 characters long'
+                        }
+                    }
+                }
+            }
+        })
+        .on('keyup', '[name="ssn"], [name="driverLicense"]', function(e) {
+            var driverLicense = $('#profileForm').find('[name="driverLicense"]').val(),
+                ssn           = $('#profileForm').find('[name="ssn"]').val(),
+                fv            = $('#profileForm').data('formValidation');
+
+            switch ($(this).attr('name')) {
+                // User is focusing the ssn field
+                case 'ssn':
+                    fv.enableFieldValidators('driverLicense', ssn === '').revalidateField('driverLicense');
+
+                    if (ssn && fv.getOptions('ssn', null, 'enabled') === false) {
+                        fv.enableFieldValidators('ssn', true).revalidateField('ssn');
+                    } else if (ssn === '' && driverLicense !== '') {
+                        fv.enableFieldValidators('ssn', false).revalidateField('ssn');
+                    }
+                    break;
+
+                // User is focusing the drivers license field
+                case 'driverLicense':
+                    if (driverLicense === '') {
+                        fv.enableFieldValidators('ssn', true).revalidateField('ssn');
+                    } else if (ssn === '') {
+                        fv.enableFieldValidators('ssn', false).revalidateField('ssn');
+                    }
+
+                    if (driverLicense && ssn === '' && fv.getOptions('driverLicense', null, 'enabled') === false) {
+                        fv.enableFieldValidators('driverLicense', true).revalidateField('driverLicense');
+                    }
+                    break;
+
+                default:
+                    break;
+            }
+        });
+});
+</script>

@@ -1,0 +1,29 @@
+---
+layout: default
+title: Showing only one message each time
+permalink: /examples/showing-one-message/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Showing only one message each time</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>By default, all messages are shown at the same time. It's also possible if you want only one message to be shown each time by triggering the <a href="/settings#event-validator">err.validator.fv</a> event.</p>
+                <p>This event is triggered when the field doesn't pass a particular validator.</p>
+                <p>In the following registration form, the username field must pass three validators. But there is one message shown each time.</p>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

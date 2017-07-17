@@ -1,0 +1,89 @@
+---
+layout: default
+title: Switching validators on the same field
+permalink: /examples/switching-validators-same-field/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Switching validators on the same field</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <p>In general, a field might have different validators. Based on various conditions, some of them can be turned on, and the remaining are turned off.</p>
+                    <p>For instance, the following form asks user to fill in a number which must be a valid Brazilian <a href="/validators/id/">ID</a> (known as CPF) or <a href="/validators/vat/">VAT</a> (known as CNPJ) number.
+                        CPF and CNPJ numbers have 11 and 14 characters respectively.
+                        Based on the length of input, we can guess which type of number user is trying to put in.</p>
+                    <p>From that, we can turn on (off) the associated validator by using the <a href="/api#enable-field-validators">enableFieldValidators()</a> method.</p>
+
+                    <p>In details, the example uses various options to archive the requirements:</p>
+
+                    <ul class="doc-list">
+                        <li>
+                            Firstly, use the <a href="/settings/#validator-enabled">enabled</a> option to enable (disable) validators initially
+                        </li>
+                    </ul>
+
+{% highlight javascript %}
+$('#profileForm').formValidation({
+    fields: {
+        yourId: {
+            validators: {
+                id: {
+                    // The id validator is enabled by default
+                    enabled: true,
+                    country: 'BR'
+                },
+                vat: {
+                    // The vat validator is disabled initially
+                    enabled: false,
+                    country: 'BR'
+                }
+            }
+        }
+    }
+});
+{% endhighlight %}
+
+                    <ul class="doc-list">
+                        <li>Lastly, turn on (off) the validators based on the length of field:</li>
+                    </ul>
+
+{% highlight javascript %}
+// If the field has 14 characters
+$('#profileForm')
+    // Disable the id validator
+    .formValidation('enableFieldValidators', 'yourId', false, 'id')
+
+    // Enable the vat one
+    .formValidation('enableFieldValidators', 'yourId', true, 'vat');
+{% endhighlight %}
+
+                    <p>Below is the working example that you can play with:</p>
+
+                    {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Related examples</h2>
+
+                    <ul class="doc-list">
+                        <li><a href="/examples/conditional-validation/">Conditional validation</a></li>
+                        <li><a href="/examples/enable-validator/">Enabling validator</a></li>
+                    </ul>
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

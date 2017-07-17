@@ -1,0 +1,21 @@
+---
+layout: demo/bootstrap
+title: vat validator &rarr; Basic example
+permalink: /validators/vat/basic/bootstrap.html
+sitemap: false
+---
+
+{% include_relative bootstrap.programmatic %}
+
+<script>
+function revalidateVat(value) {
+    var $form = $('form');
+    $form
+        .find('input[name="vat"]')
+            .val(value)
+            .end()
+        .formValidation('revalidateField', 'vat');
+
+    return $form.data('formValidation').isValidField('vat');
+}
+</script>

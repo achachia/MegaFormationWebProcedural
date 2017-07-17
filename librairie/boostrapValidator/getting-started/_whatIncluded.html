@@ -1,0 +1,135 @@
+<section>
+    <h2>What's included?</h2>
+
+    <p>The <a href="/download/">FormValidation package</a> consists of the following files:</p>
+
+{% highlight bash %}
+formvalidation/
+├── dist
+│   ├── css
+│   │   └── formValidation(.min).css
+│   │
+│   └── js
+│       ├── framework
+│       │   ├── bootstrap(.min).js
+│       │   ├── foundation(.min).js
+│       │   ├── pure(.min).js
+│       │   ├── semantic(.min).js
+│       │   └── uikit(.min).js
+│       │
+│       ├── language
+│       │   ├── de_DE.js
+│       │   ├── en_US.js
+│       │   └── ...
+│       │
+│       ├── formValidation(.min).js
+│       └── formValidation.popular(.min).js
+│
+└── src
+    ├── css
+    │   └── formValidation.css
+    │
+    └── js
+        ├── framework
+        │   ├── bootstrap.js
+        │   ├── foundation.js
+        │   ├── pure.js
+        │   ├── semantic.js
+        │   └── uikit.js
+        │
+        ├── language
+        │   ├── de_DE.js
+        │   ├── en_US.js
+        │   └── ...
+        │
+        ├── validator
+        │   ├── base64.js
+        │   ├── between.js
+        │   ├── callback.js
+        │   └── ...
+        │
+        ├── base.js     // The main plugin source file containing the base class
+        └── helper.js   // Helper class
+{% endhighlight %}
+
+    <p>The <code>src</code> directory consists of the original source files. Meanwhile, the <code>dist</code> directory consists of files which is combined and compressed.
+     It should be used in the production site.</p>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>Directory</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <code>dist/css</code><br/>
+                        <code>src/css</code>
+                    </td>
+                    <td>Consists of CSS file that defines CSS classes for styling elements</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>dist/js/framework</code><br/>
+                        <code>src/js/framework</code>
+                    </td>
+                    <td>Consists of Javascript files that support specific framework. You only need to include one file associating with current used framework</td>
+                </tr>
+                <tr>
+                    <td>
+                        <code>dist/js/language</code><br/>
+                        <code>stc/js/language</code>
+                    </td>
+                    <td>The language packages that provide the default error messages</td>
+                </tr>
+                <tr>
+                    <td><code>src/js/validator</code></td>
+                    <td>Consists of built-in validators</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <p><code>dist/js/formValidation(.min).js</code> already include all built-in validators.</p>
+    <p><code>dist/js/formValidation.popular(.min).js</code> only consists of most popular validators. This file might be used on a heavy site with needed validators only.</p>
+
+    <h3>Language packages</h3>
+
+    <p>FormValidation has been translated into the following languages, which are also available in both <code>src/language</code> and <code>dist/language</code> directories:</p>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Language</th>
+                    <th>File Name</th>
+                    <th>Translated By</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>-</td>
+                    <td>English <span class="label label-default">built in</span></td>
+                    <td><a href="/vendor/formvalidation/js/language/en_US.js">en_US.js</a></td>
+                    <td><a href="http://github.com/nghuuphuoc">@nghuuphuoc</a></td>
+                </tr>
+
+                {% for package in site.data.languages %}
+                <tr>
+                    <td>{{ forloop.index }}</td>
+                    <td>{{ package.name }}</td>
+                    <td><a href="/vendor/formvalidation/js/language/{{ package.file }}">{{ package.file }}</a></td>
+                    <td>{% for author in package.author %}<a href="http://github.com/{{ package.author }}" style="display: block;">@{{ author }}</a>{% endfor %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="doc-alert doc-alert-info">
+        If you wonder how to use the language package, then this <a href="/examples/using-language-package/">example</a> is exactly for you
+    </div>
+</section>

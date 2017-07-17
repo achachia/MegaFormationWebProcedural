@@ -1,0 +1,177 @@
+---
+layout: default
+title: Using Ajax to submit the form
+permalink: /examples/ajax-submit/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Using Ajax to submit the form</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <p>After clicking the <a href="/settings/#form-button">submit</a> button, FormValidation will submit the form if all the fields are valid.</p>
+                    <p>If you want to do additional tasks instead of submitting the form, you can trigger the <a href="/settings/#event-form">success.form.fv</a> event:</p>
+
+{% highlight javascript %}
+$(document).ready(function() {
+    $(form)
+        .formValidation({
+            ... options ...
+        })
+        .on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            // Some instances you can use are
+            var $form = $(e.target),        // The form instance
+                fv    = $(e.target).data('formValidation'); // FormValidation instance
+
+            // Do whatever you want here ...
+        });
+});
+{% endhighlight %}
+
+                    <p>Inside the <code>success.form.fv</code> event handler, if you want to submit the form after doing your custom job, just simply use the <a href="/api/#default-submit">defaultSubmit()</a> method:</p>
+
+{% highlight javascript %}
+$(document).ready(function() {
+    $(form)
+        .formValidation({
+            ... options ...
+        })
+        .on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            var $form = $(e.target),
+                fv    = $(e.target).data('formValidation');
+
+            // Do whatever you want here ...
+
+            // Then submit the form as usual
+            fv.defaultSubmit();
+        });
+});
+{% endhighlight %}
+
+                    <p>The next sections demonstrates one of most frequent usage &mdash; using Ajax to submit the form.</p>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Using Ajax to submit form data</h2>
+
+                    <p>The following code snippet uses the jQuery's <a href="http://api.jquery.com/serialize/">serialize()</a> method to get the form data,
+                        and then <a href="http://api.jquery.com/jquery.ajax/">ajax()</a> methods to send the data to the back-end endpoint: </p>
+
+{% highlight javascript %}
+$(document).ready(function() {
+    $(form)
+        .formValidation({
+            ... options ...
+        })
+        .on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            var $form = $(e.target),
+                fv    = $form.data('formValidation');
+
+            // Use Ajax to submit form data
+            $.ajax({
+                url: $form.attr('action'),
+                type: 'POST',
+                data: $form.serialize(),
+                success: function(result) {
+                    // ... Process the result ...
+                }
+            });
+        });
+});
+{% endhighlight %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Using Ajax to submit form data including files</h2>
+
+                    <p>Assume that the form consists of file input:</p>
+
+{% highlight html %}
+<input type="file" name="uploadedFiles" multiple />
+{% endhighlight %}
+
+                    <p>You can use <a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">FormData</a> to collect the form data including selected files:</p>
+
+{% highlight javascript %}
+$(document).ready(function() {
+    $(form)
+        .formValidation({
+            ... options ...
+        })
+        .on('success.form.fv', function(e) {
+            // Prevent form submission
+            e.preventDefault();
+
+            var $form    = $(e.target),
+                formData = new FormData(),
+                params   = $form.serializeArray(),
+                files    = $form.find('[name="uploadedFiles"]')[0].files;
+
+            $.each(files, function(i, file) {
+                // Prefix the name of uploaded files with "uploadedFiles-"
+                // Of course, you can change it to any string
+                formData.append('uploadedFiles-' + i, file);
+            });
+
+            $.each(params, function(i, val) {
+                formData.append(val.name, val.value);
+            });
+
+            $.ajax({
+                url: $form.attr('action'),
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                type: 'POST',
+                success: function(result) {
+                    // Process the result ...
+                }
+            });
+        });
+});
+{% endhighlight %}
+
+                    <p>Please pay attention on <code>contentType</code> and <code>processData</code> options of the jQuery's <a href="http://api.jquery.com/jquery.ajax/">ajax()</a> method:</p>
+                    <ul class="doc-list">
+                        <li>Setting <code>contentType: false</code> tells jQuery to not add <code>Content-Type</code> to the request</li>
+                        <li>Setting <code>processData: false</code> tells jQuery to not convert our data (which is a FormData instance) to a string</li>
+                    </ul>
+
+                    <p>On the server side, you can get the uploaded files under the names <code>uploadedFiles-0</code>, <code>uploadedFiles-1</code>, and so forth, depending
+                        how many files are chosen.</p>
+
+                    <div class="doc-alert doc-alert-warning">
+                        <a href="https://developer.mozilla.org/en-US/docs/Web/API/FormData">FormData</a> are supported in modern browsers including IE 10+.
+                        You shouldn't use it if your application needs to support previous versions of IE such as IE 8, IE 9.
+                    </div>
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                <div id="toc" class="doc-toc"></div>
+
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

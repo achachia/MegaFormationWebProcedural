@@ -1,0 +1,103 @@
+---
+layout: default
+title: Playing with Bootstrap Datepicker
+permalink: /examples/bootstrap-datepicker/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Playing with Bootstrap Datepicker</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>The following example illustrates an usage of FormValidation with the <a href="https://github.com/eternicode/bootstrap-datepicker">Bootstrap Datepicker</a> plugin.</p>
+                <div class="doc-alert doc-alert-info">
+                    You should look at the <a href="/examples#compatibility">basic principles</a> when integrating FormValidation with other plugins
+                </div>
+
+                <section>
+                    <h2>Basic example</h2>
+
+                    {% include demo/tabs.html id="basic" frameworks="bootstrap" dir="basic" codes="programmatic" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Setting date in a range</h2>
+
+                    <p>Since Bootstrap Datepicker provides <a href="http://bootstrap-datepicker.readthedocs.org/en/release/options.html#startdate">startDate</a> and <a href="http://bootstrap-datepicker.readthedocs.org/en/release/options.html#enddate">endDate</a> options,
+                        and the <a href="/validators/date">date</a> validator supports <code>min</code> and <code>max</code> options, we can set a date range easily.</p>
+                    <p>The following example asks to enter a date between 01/01/2010 and 12/30/2020.</p>
+
+                    {% include demo/tabs.html id="range" frameworks="bootstrap" dir="range" codes="programmatic" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Start and end dates</h2>
+
+                    <p>Some forms requires both start and end dates. The start date must be earlier than the end one. And vice versa, the end date must be later the the start one.</p>
+
+                    <p>You can see that the <code>min</code> and <code>max</code> options are used as <a href="/settings/#dynamic-option">dynamic options</a>:</p>
+
+{% highlight javascript %}
+$('#eventForm').formValidation({
+    fields: {
+        startDate: {
+            validators: {
+                date: {
+                    max: 'endDate'
+                    ...
+                }
+            }
+        },
+        endDate: {
+            validators: {
+                date: {
+                    min: 'startDate'
+                    ...
+                }
+            }
+        }
+    }
+});
+{% endhighlight %}
+
+                    <p>Because the start and end date depend on each other, whenever one of them is changed, we need to revalidate the other if it is not valid:</p>
+
+{% highlight javascript %}
+$('#eventForm')
+    .formValidation(...)
+    .on('success.field.fv', function(e, data) {
+        // The success.field.fv is triggered when a field is valid
+        // data.field ---> the field name
+        // data.fv    ---> the plugin instance which you can call some APIs on
+
+        if (data.field === 'startDate' && data.fv.isValidField('endDate') === false) {
+            // We need to revalidate the end date
+            data.fv.revalidateField('endDate');
+        }
+
+        // Do the same check for the end date
+        // ...
+    });
+{% endhighlight %}
+
+                    {% include demo/tabs.html id="start-end" frameworks="bootstrap" dir="start-end" codes="programmatic" %}
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                <div id="toc" class="doc-toc"></div>
+
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

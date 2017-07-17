@@ -1,0 +1,61 @@
+<form id="messageForm" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Message</label>
+        <div class="col-xs-9">
+            <textarea class="form-control" name="message" rows="5"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Email address</label>
+        <div class="col-xs-6">
+            <input type="text" class="form-control" name="email" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-9 col-xs-offset-3">
+            <button type="submit" class="btn btn-default">Send</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#messageForm').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            message: {
+                // The messages for this field are shown as usual
+                validators: {
+                    notEmpty: {
+                        message: 'The message is required'
+                    },
+                    stringLength: {
+                        min: 20,
+                        max: 500,
+                        message: 'The message must be more than 20 and less than 500 characters long'
+                    }
+                }
+            },
+            email: {
+                // Show the message in a tooltip
+                err: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The email address is not valid'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

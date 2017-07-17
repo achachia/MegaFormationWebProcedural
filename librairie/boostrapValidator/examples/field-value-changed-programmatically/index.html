@@ -1,0 +1,41 @@
+---
+layout: default
+title: Field value is changed programmatically
+permalink: /examples/field-value-changed-programmatically/
+image: /examples/field-value-changed-programmatically/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Field value is changed programmatically</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>When the field value is changed programmatically by either jQuery's <code>.val()</code> method or other plugins,
+                    FormValidation doesn't change the field validity and update the feedback icon.</p>
+                <p>You need to ask the plugin to revalidate it by calling the <a href="/api#revalidate-field">revalidateField()</a> method.</p>
+
+{% highlight javascript %}
+// Update the field value
+$fieldElement.val(newValue);
+
+// Revalidate it
+$(form).formValidation('revalidateField', fieldName);
+{% endhighlight %}
+
+                <p>It's one of principles when <a href="/examples#compatibility">integrating</a> FormValidation with 3rd party plugins.</p>
+                <p>In the following example, after clicking the <strong>Set values</strong> button, the <strong>First name</strong> and <strong>Last name</strong> field are revalidated.</p>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

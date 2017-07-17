@@ -1,0 +1,92 @@
+---
+layout: default
+title: Validate an integer number
+permalink: /validators/integer/
+prev:
+    url: /validators/imo/
+    title: imo validator
+next:
+    url: /validators/ip/
+    title: ip validator
+related:
+    - digits
+    - numeric
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>integer validator</h1>
+        <p>Validate an integer number. Accept both positive and negative number</p>
+        <p>&larr; <a href="/validators">Validators</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <h2>Options</h2>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Option</th>
+                                    <th>HTML attribute</th>
+                                    <th>Type</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>message</code></td>
+                                    <td><code>data-fv-integer-message</code></td>
+                                    <td>String</td>
+                                    <td>The error message</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="doc-alert doc-alert-info">
+                        When setting options via HTML attributes, remember to enable the validator by setting data-fv-integer="true".<br/>
+                        You don't need to do that when<br/>
+                        i) using HTML 5 type="number" attribute,<br/>
+                        ii) and the step attribute is not specified, or its value is an integer
+                    </div>
+
+                    <div class="doc-alert doc-alert-info">
+                        The message option can be updated on the fly via the <a href="/api/#update-message">updateMessage()</a> method
+                    </div>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Examples</h2>
+
+                    <h3>Basic example</h3>
+
+                    {% include demo/tabs.html id="basic" frameworks="bootstrap" dir="basic" codes="programmatic,declarative" %}
+
+                    <h3>HTML 5 example</h3>
+
+                    <p>You can use HTML 5 <code>type="number"</code> attribute to enable the integer validator.</p>
+                    {% include demo/tabs.html id="html5" frameworks="bootstrap" dir="html5" codes="declarative" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                {% include related.html %}
+
+                {% include pagination.html %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                <div id="toc" class="doc-toc"></div>
+
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,17 @@
+<section>
+    <h3 id="field-selector">selector</h3>
+
+    <p><code>selector: String</code> &mdash; The CSS selector to indicate the field. It is used in case that it's not possible to use the <code>name</code> attribute for the field.</p>
+
+    <h5>Example</h5>
+    <p>Instead of using the <code>name</code> attribute, the following form uses the <code>selector</code> option to define the fields:</p>
+
+    {% include demo/tabs.html id="field-selector" frameworks="bootstrap" dir="field/selector" codes="programmatic" %}
+
+    <p>As you see, the field can be defined by a ID (<code>#ccNumber</code>), class (<code>.cvvNumber</code>) or attribute (<code>[data-stripe="exp-month"]</code>) selector.</p>
+
+    <ul class="doc-list">
+        <li><a href="/examples/validating-array-inputs/#inputs-with-different-names">Validating array of inputs with different names</a></li>
+        <li><a href="/examples/requiring-at-least-one-field/">Requiring at least one field</a></li>
+    </ul>
+</section>

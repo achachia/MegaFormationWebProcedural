@@ -1,0 +1,67 @@
+<form id="passwordSemanticForm" class="ui grid form fv-form-horizontal">
+    <div class="row field">
+        <label class="four wide column">Password</label>
+        <div class="eight wide column">
+            <div class="ui input icon">
+                <input type="password" name="pwd" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <label class="four wide column"></label>
+        <div class="eight wide column">
+            <button type="submit" class="ui primary button">Validate</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    FormValidation.Validator.password = {
+        validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value === '') {
+                return true;
+            }
+
+            if (value.length < 8) {
+                return false;
+            }
+            if (value === value.toLowerCase()) {
+                return false;
+            }
+            if (value === value.toUpperCase()) {
+                return false;
+            }
+            if (value.search(/[0-9]/) < 0) {
+                return false;
+            }
+
+            return true;
+        }
+    };
+
+    $('#passwordSemanticForm').formValidation({
+        framework: 'semantic',
+        icon: {
+            valid: 'checkmark icon',
+            invalid: 'remove icon',
+            validating: 'refresh icon',
+            feedback: 'fv-control-feedback'
+        },
+        fields: {
+            pwd: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and cannot be empty'
+                    },
+                    password: {
+                        message: 'The password is not valid'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

@@ -1,0 +1,35 @@
+<!-- Include Mask plugin -->
+<script src="//oss.maxcdn.com/jquery.mask/1.11.4/jquery.mask.min.js"></script>
+
+<form id="maskForm" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">IP address</label>
+        <div class="col-xs-5">
+            <input type="text" class="form-control" name="ipAddress" />
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#maskForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                ipAddress: {
+                    validators: {
+                        ip: {
+                            message: 'The IP address is not valid'
+                        }
+                    }
+                }
+            }
+        })
+        .find('[name="ipAddress"]').mask('099.099.099.099');
+});
+</script>

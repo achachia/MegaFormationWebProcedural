@@ -1,0 +1,39 @@
+<!-- Google Place library -->
+<script src="//maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+
+<!-- Geocomplete plugin -->
+<script src="//cdn.jsdelivr.net/jquery.geocomplete/1.6.4/jquery.geocomplete.min.js"></script>
+
+<style type="text/css">
+.mapCanvas {
+    width: 600px;
+    height: 400px;
+}
+</style>
+
+<form id="addressForm" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Address</label>
+        <div class="col-xs-5">
+            <input type="text" class="form-control" name="address" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Map</label>
+        <div class="col-xs-9">
+            <div id="map" class="mapCanvas"></div>
+        </div>
+    </div>
+
+    <div id="addressDetails" class="hide">
+        <input name="lat" type="hidden" class="form-control" />
+        <input name="lng" type="hidden" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-9 col-xs-offset-3">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+</form>

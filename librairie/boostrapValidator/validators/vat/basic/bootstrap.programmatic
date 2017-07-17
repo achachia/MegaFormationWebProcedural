@@ -1,0 +1,30 @@
+<form id="vatForm" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">VAT number</label>
+        <div class="col-xs-5">
+            <input type="text" class="form-control" name="vat" />
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#vatForm').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            vat: {
+                validators: {
+                    vat: {
+                        message: 'The VAT number is not valid'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

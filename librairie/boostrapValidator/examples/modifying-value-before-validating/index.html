@@ -1,0 +1,111 @@
+---
+layout: default
+title: Modifying the value before validating
+permalink: /examples/modifying-value-before-validating/
+image: /examples/modifying-value-before-validating/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Modifying the value before validating</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <p>By default, the value of field will be taken by using jQuery's <code>val()</code> method.</p>
+                    <p>In some case, you might want to adjust the value before performing validations.
+                        For example, the <a href="/validators/numeric/">numeric</a> validator doesn't allow to use a comma (,) for thousand separator.</p>
+                    <p>Fortunately, it's now possible to hook the value of field via the <a href="/settings/#validator-transformer">transformer</a> option.
+                        The following piece of code is an usage of this option:</p>
+
+{% highlight javascript %}
+$(form).formValidation({
+    fields: {
+        fieldName: {
+            validators: {
+                validatorName: {
+                    transformer: function($field, validatorName, validator) {
+                        // $field is the jQuery object presenting the field element
+                        // validatorName is the name of current validator (numeric)
+                        // validator is the instance of plugin
+
+                        var value = $field.val();
+
+                        // Adjust the value
+                        // ...
+
+                        // and return new value
+                        return value;
+                    }
+                }
+            }
+        }
+    }
+});
+{% endhighlight %}
+
+                    <div class="doc-alert doc-alert-info">
+                        The transformer option only adjusts the field value and uses the modified value for validating.
+                        It does NOT send the modified value to the server when submitting the form
+                    </div>
+
+                    <p>The next sections introduce some examples demonstrating how to apply this option for popular validators.</p>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Using with the numeric validator</h2>
+
+                    <p>By default, the <a href="/validators/numeric/">numeric</a> validator doesn't accept the comma.</p>
+                    <p>In the form below, the <strong>Price</strong> field now accepts value using comma for thousand separator, such as <strong>12,570.634</strong></p>
+
+                    {% include demo/tabs.html id="numeric" frameworks="bootstrap" dir="numeric" codes="programmatic" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Using with the phone validator</h2>
+
+                    <p>The <a href="/validators/phone/">phone</a> validator supports phone number in various countries.
+                        Despite the fact that it try to support many possible formats of a phone number, it can't cover
+                        all or special one which you want it to be a valid phone number.</p>
+
+                    <p>For instance, a number containing the spaces such as XXX XXX XXXX (where X presents a digit from 0-9)
+                        is treated as invalid US phone number.</p>
+                    <p>By using the transformer option, we can turn this kind of number into a valid one by removing all spaces.</p>
+
+                    {% include demo/tabs.html id="phone" frameworks="bootstrap" dir="phone" codes="programmatic" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Using with WYSIWYG editors</h2>
+
+                    <p>WYSIWYG stands for What You See Is What You Get. A WYSIWYG editor provides a visual way to edit the content of input
+                        which mostly is a textarea element. <a href="/examples/tinymce/">TinyMCE</a>, <a href="/examples/ckeditor/">CKEditor</a>,
+                        <a href="/examples/summernote/">Summernote</a> are some popular one.</p>
+                    <p>Since these editors usually generate additional HTML tags, the raw content of input might be different
+                        with the value returned by the editor. The <a href="/validators/notEmpty/">notEmpty</a>,
+                        <a href="/validators/stringLength/">stringLength</a> validators maybe don't work correctly with the field using a WYSIWYG editor.</p>
+
+                    <p>The following form uses the transformer option to get raw text of the editor before doing validations.</p>
+
+                    {% include demo/tabs.html id="wysiwyg" frameworks="bootstrap" dir="wysiwyg" codes="programmatic" %}
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                <div id="toc" class="doc-toc"></div>
+
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

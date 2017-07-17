@@ -1,0 +1,62 @@
+<form id="messageForm" class="uk-form uk-form-horizontal">
+    <div class="uk-form-row">
+        <label class="uk-form-label">Message</label>
+        <div class="uk-form-controls">
+            <textarea name="message" rows="5" class="uk-width-1-1"></textarea>
+        </div>
+    </div>
+
+    <div class="uk-form-row">
+        <label class="uk-form-label">Email address</label>
+        <div class="uk-form-controls">
+            <input name="email" type="text" class="uk-form-width-medium" />
+        </div>
+    </div>
+
+    <div class="uk-form-row">
+        <label class="uk-form-label"></label>
+        <div class="uk-form-controls">
+            <button type="submit" class="uk-button uk-button-primary">Send</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#messageForm').formValidation({
+        framework: 'uikit',
+        icon: {
+            valid: 'fa fa-check',
+            invalid: 'fa fa-times',
+            validating: 'fa fa-refresh'
+        },
+        fields: {
+            message: {
+                // The messages for this field are shown as usual
+                validators: {
+                    notEmpty: {
+                        message: 'The message is required'
+                    },
+                    stringLength: {
+                        min: 20,
+                        max: 500,
+                        message: 'The message must be more than 20 and less than 500 characters long'
+                    }
+                }
+            },
+            email: {
+                // Show the message in a tooltip
+                err: 'tooltip',
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The email address is not valid'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

@@ -1,0 +1,122 @@
+<form id="multipleForm" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Gender</label>
+        <div class="col-xs-5">
+            <div class="radio">
+                <label>
+                    <input type="radio" name="gender" value="male" /> Male
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="gender" value="female" /> Female
+                </label>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio" name="gender" value="other" /> Other
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Browser</label>
+        <div class="col-xs-5">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="browsers[]" value="chrome" /> Google Chrome
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="browsers[]" value="firefox" /> Firefox
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="browsers[]" value="ie" /> IE
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="browsers[]" value="safari" /> Safari
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="browsers[]" value="opera" /> Opera
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="browsers[]" value="other" /> Other
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Editors</label>
+        <div class="col-xs-5">
+            <input class="form-control" type="text" name="editors[]" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-offset-3 col-xs-5">
+            <input class="form-control" type="text" name="editors[]" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-offset-3 col-xs-5">
+            <input class="form-control" type="text" name="editors[]" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-offset-3 col-xs-5">
+            <input class="form-control" type="text" name="editors[]" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-9 col-xs-offset-3">
+            <button type="submit" class="btn btn-default">Validate</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#multipleForm').formValidation({
+        framework: 'bootstrap',
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'The gender is required'
+                    }
+                }
+            },
+            'browsers[]': {
+                validators: {
+                    notEmpty: {
+                        message: 'Please specify at least one browser you use daily for development'
+                    }
+                }
+            },
+            'editors[]': {
+                validators: {
+                    notEmpty: {
+                        message: 'The editor names are required'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

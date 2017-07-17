@@ -1,0 +1,46 @@
+---
+layout: default
+title: News
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>News</h1>
+        <p>The latest news about FormValidation</p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                {% for post in paginator.posts %}
+                    {% include post.html %}
+
+                    <div class="doc-hr"></div>
+                {% endfor %}
+
+                <div class="doc-pagination">
+                    {% if paginator.next_page %}
+                        <a href="/news/page{{ paginator.next_page }}" class="doc-pagination-older">&larr; Older</a>
+                    {% else %}
+                        <span class="doc-pagination-older">&larr; Older</span>
+                    {% endif %}
+
+                    {% if paginator.previous_page %}
+                        {% if paginator.page == 2 %}
+                            <a href="/news/" class="doc-pagination-newer">Newer &rarr;</a>
+                        {% else %}
+                            <a href="/news/page{{ paginator.previous_page }}" class="doc-pagination-newer">Newer &rarr;</a>
+                        {% endif %}
+                    {% else %}
+                        <span class="doc-pagination-newer">Newer &rarr;</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

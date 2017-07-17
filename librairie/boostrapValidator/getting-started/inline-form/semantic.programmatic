@@ -1,0 +1,62 @@
+<div class="ui grid">
+    <div class="twelve wide column centered">
+        <form id="signinForm" class="ui form">
+            <div class="fields">
+                <div class="six wide field">
+                    <div class="ui input icon">
+                        <input type="text" name="username" placeholder="Username" />
+                    </div>
+                </div>
+
+                <div class="six wide field">
+                    <div class="ui input icon">
+                        <input type="password" name="password" placeholder="Password" />
+                    </div>
+                </div>
+
+                <div class="four wide field">
+                    <!-- Do NOT use name="submit" or id="submit" for the Submit button -->
+                    <button type="submit" class="ui primary button">Sign in</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('#signinForm').formValidation({
+        framework: 'semantic',
+        icon: {
+            valid: 'checkmark icon',
+            invalid: 'remove icon',
+            validating: 'refresh icon'
+        },
+        fields: {
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'The username can only consist of alphabetical, number and underscore'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

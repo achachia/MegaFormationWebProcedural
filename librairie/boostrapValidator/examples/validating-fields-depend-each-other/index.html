@@ -1,0 +1,106 @@
+---
+layout: default
+title: Validating fields that depend on each other
+permalink: /examples/validating-fields-depend-each-other/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Validating fields that depend on each other</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>In fact, a form might need to validate multiple fields which any of them depends to each other. Changing value of any field will effect to
+                    the validity of other one.</p>
+
+                <p>For instance, a form for creating new event often have two fields for indicating the start and end date of the event.
+                    The start date must be earlier than the end one.  And vice versa, the end date must be later than the start one.
+                    User usually fill in the start date field first, and then the end date one. If the end date is not later than the start one, the form informs
+                    that the end date is not valid. It behaves as expected.</p>
+
+                <p>For this specific form, we can use the <code>min</code> and <code>max</code> options provided by the <a href="/validators/date/">date</a> validator:</p>
+
+{% highlight javascript %}
+$('#eventForm').formValidation({
+    fields: {
+        startDate: {
+            validators: {
+                date: {
+                    message: 'The start date is not valid',
+                    format: 'YYYY-MM-DD',
+                    max: 'endDate'
+                }
+            }
+        },
+        endDate: {
+            validators: {
+                date: {
+                    message: 'The end date is not valid',
+                    format: 'YYYY-MM-DD',
+                    min: 'startDate'
+                }
+            }
+        }
+    }
+});
+{% endhighlight %}
+
+                <p>The problem comes out when user try to adjust the start date being earlier than the current end date. Despite the fact that
+                the end date is valid now, it is still marked as invalid.</p>
+
+                <p>In order to fix this, when the start date is valid, we need to revalidate the end date if it's not valid. The <a href="/settings/#event-field">onSuccess</a> callback,
+                <a href="/api/#is-valid-field">isValidField()</a> and <a href="/api/#revalidate-field">revalidateField()</a> methods are used as in the
+                following code snippet:</p>
+
+{% highlight javascript %}
+$('#eventForm').formValidation({
+    fields: {
+        startDate: {
+            validators: {
+                ...
+            },
+            onSuccess: function(e, data) {
+                // data.fv is the plugin instance
+
+                // If the end date isn't valid
+                if (!data.fv.isValidField('endDate')) {
+                    // Revalidate it
+                    data.fv.revalidateField('endDate');
+                }
+            }
+        },
+        endDate: {
+            validators: {
+                ...
+            },
+            onSuccess: function(e, data) {
+                // data.fv is the plugin instance
+
+                // Revalidate the start date if it's not valid
+                if (!data.fv.isValidField('startDate')) {
+                    data.fv.revalidateField('startDate');
+                }
+            }
+        }
+    }
+});
+{% endhighlight %}
+
+                <div class="doc-alert doc-alert-info">
+                    It's recommended to use a date picker along with the date input. There are a lot of
+                    <a href="/examples/#compatibility">examples</a> showing how to integrate FormValidation with popular date picker plugins
+                </div>
+
+                {% include demo/tabs.html id="basic" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

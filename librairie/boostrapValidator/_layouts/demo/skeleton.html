@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article#">
+    {% include demo/head.html %}
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" />
+    <link rel="stylesheet" href="/vendor/formvalidation/css/formValidation.min.css">
+    <style type="text/css">
+    {% include framework/skeleton/skeleton.css %}
+    </style>
+    <link rel="stylesheet" href="/asset/css/demo.css">
+
+    <script src="/vendor/formvalidation/js/formValidation.min.js"></script>
+    <script>
+    {% include framework/skeleton/skeleton.js %}
+    </script>
+</head>
+<body class="demo-skeleton">
+    <div class="container">
+        <div class="row" id="demoContainer">
+            {{ content }}
+        </div>
+    </div>
+
+<script>
+{% include demo/foot.js %}
+</script>
+</body>
+</html>

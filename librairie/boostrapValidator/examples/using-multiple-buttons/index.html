@@ -1,0 +1,38 @@
+---
+layout: default
+title: Using multiple buttons
+permalink: /examples/using-multiple-buttons/
+image: /examples/using-multiple-buttons/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Using multiple buttons</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>A form might have multiple buttons. Clicking any of them will validate the form, but each button might do additional task.</p>
+                <p>For example, a form of writing article have three submit buttons:</p>
+                <ul class="doc-list">
+                    <li>A <strong>Save</strong> button saves the article and keeps the current publishing status</li>
+                    <li>A <strong>Save and publish</strong> button saves and publishes the article</li>
+                    <li>A <strong>Save as draft</strong> button saves the article as draft</li>
+                </ul>
+                <p>These buttons will execute form validation when being clicked.</p>
+
+                <p>In order to archive this case, first, we need to trigger the <a href="/settings/#event-form">success.form.fv</a> event to perform custom handler when the form is valid.</p>
+                <p>Next, use the <a href="/api/#get-submit-button">getSubmitButton()</a> method to determine which button is clicked.</p>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

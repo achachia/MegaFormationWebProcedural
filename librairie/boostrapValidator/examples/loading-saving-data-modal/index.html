@@ -1,0 +1,109 @@
+---
+layout: default
+title: Loading and saving data in a modal
+permalink: /examples/loading-saving-data-modal/
+image: /examples/loading-saving-data-modal/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Loading and saving data in a modal</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <p>This example shows a popular usage when working with the list of data.</p>
+                    <p>The scenario is described as following:</p>
+
+                    <ul class="doc-list">
+                        <li>The data are populated in a list. It's up to you to choose showing the list in a <code>table</code>, <code>ul</code> or any tag.</li>
+                        <li>In each element presenting a data item, there is a button for editing the data</li>
+                        <li>When clicking the button, the data is loaded from the server and then populated in a form</li>
+                        <li>The form need to be validated and its data will be sent to server</li>
+                        <li>Loading and saving data are done by Ajax requests</li>
+                    </ul>
+
+                    <p>You can use a modal plugin to show up the form. There are some choices for you when using the <a href="http://getbootstrap.com/">Bootstrap</a> framework, such as
+                    <a href="http://getbootstrap.com/javascript/#modals">Bootstrap's Modal</a> or <a href="http://bootboxjs.com/">Bootbox</a>.</p>
+
+                    <p>Our example will use Bootbox because it allows to create programmatic dialog boxes easily.</p>
+                    <p>When showing the form that consists of data loaded from server, you shouldn't use a string containing entire form markup:</p>
+
+{% highlight javascript %}
+// Don't
+var message = [
+    '<form id="userForm">',
+        '<input type="text" name="email" value="..." />',
+    '</form>'
+].join('');
+
+bootbox.dialog({
+    message: message
+});
+{% endhighlight %}
+
+                    <p>Instead, prepare a form, populate the data and pass the form element:</p>
+
+{% highlight html %}
+// Do
+<form id="userForm" method="post" style="display: none;">
+    <input type="text" name="email" />
+</form>
+
+$('#userForm').find('[name="email"]').val(...);
+
+bootbox.dialog({
+    message: $('#userForm')
+});
+{% endhighlight %}
+
+                    <p>By doing this, we can easily adjust the form markup as well as manage the DOM.</p>
+
+                    <p>The example also triggers event to <a href="/examples/ajax-submit/">save the form data</a> via an Ajax request:</p>
+
+{% highlight javascript %}
+$('#userForm')
+    .formValidation({
+        ...
+    })
+    .on('success.form.fv', function(e) {
+        // Save the form data via an Ajax request
+        e.preventDefault();
+
+        $.ajax({
+            url: '/path/to/api/endpoint/',
+            data: $form.serialize()
+        }).success(function(response) {
+            // ... Process the result
+        });
+    });
+{% endhighlight %}
+
+                    <div class="doc-alert doc-alert-info">
+                        To demonstrates loading and saving data via Ajax requests, the example uses <a href="http://jsonplaceholder.typicode.com/">jsonplaceholder</a>, a fake REST API service
+                    </div>
+
+                    {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Related examples</h2>
+                    <ul class="doc-list">
+                        <li><a href="/examples/bootbox/">Playing with Bootbox</a></li>
+                        <li><a href="/examples/modal/">Validating a form placed inside a Bootstrap modal</a></li>
+                    </ul>
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

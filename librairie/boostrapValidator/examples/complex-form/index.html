@@ -1,0 +1,38 @@
+---
+layout: default
+title: Complex form
+permalink: /examples/complex-form/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Complex form</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>In <a href="/getting-started#writing-form">most cases</a>, the form is structured by pair of label and field which are placed inside an element with certain class. For example, Bootstrap uses <code>.form-group</code> class for field container element.</p>
+                <p>In fact, you might use more complex forms such as</p>
+                <ul class="doc-list">
+                    <li>There are many fields in the same row</li>
+                    <li>Using another element that differs than <code>class=".form-group"</code> to place the fields.</li>
+                </ul>
+                <p>Fortunately, with the <a href="/settings#form-row-selector">row</a> option, you can create any custom form as you would.</p>
+
+                <div class="doc-alert doc-alert-info">
+                    <p>If there are more than one fields in the same row and the group option isn't used, the row might have the success color even if it contains at least one invalid field.</p>
+                    <p>Defining the group option for all fields in row also fix this issue.</p>
+                </div>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

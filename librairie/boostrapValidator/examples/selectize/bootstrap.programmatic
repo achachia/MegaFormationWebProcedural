@@ -1,0 +1,70 @@
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.0/css/selectize.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.0/css/selectize.bootstrap3.min.css" />
+<script src="//cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.0/js/standalone/selectize.min.js"></script>
+
+<style type="text/css">
+#selectizeForm .frameworkContainer .form-control-feedback {
+    right: -15px;
+}
+</style>
+
+<form id="selectizeForm" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-4 control-label">Favorite frameworks</label>
+        <div class="col-xs-6 frameworkContainer">
+            <input class="form-control" name="frameworks" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-6 col-xs-offset-4">
+            <button type="submit" class="btn btn-default">Submit</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#selectizeForm')
+        .formValidation({
+            framework: 'bootstrap',
+            excluded: ':disabled',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                frameworks: {
+                    validators: {
+                        callback: {
+                            message: 'Please indicate 2-4 Javascript frameworks',
+                            callback: function(value, validator, $field) {
+                                // Get the frameworks separated by a comma
+                                var frameworks = validator.getFieldElements('frameworks').val().split(',');
+                                return (frameworks.length >= 2 && frameworks.length <= 4);
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        .find('[name="frameworks"]')
+            .selectize({
+                plugins: ['remove_button'],
+                delimiter: ',',
+                persist: false,
+                create: function(input) {
+                    return {
+                        value: input,
+                        text: input
+                    };
+                }
+            })
+            // Revalidate the frameworks field when it is changed
+            .on('change', function(e) {
+                $('#selectizeForm').formValidation('revalidateField', 'frameworks');
+            })
+            .end();
+});
+</script>

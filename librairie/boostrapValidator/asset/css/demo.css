@@ -1,0 +1,56 @@
+body {
+  font-family: 'open sans';
+}
+.demo-frame-body {
+  overflow: hidden;
+}
+.demo-frame-body .demo-ad {
+  visibility: hidden;
+}
+.demo-bootstrap .form-group:last-child {
+  margin-bottom: 0;
+}
+.demo-foundation button[type="submit"],
+.demo-foundation .button[type="submit"] {
+  margin-bottom: 0;
+}
+.demo-semantic {
+  background: #fff;
+}
+/* --- Ads --- */
+#carbonads {
+  border: 1px solid #e5e5e5;
+  font-size: 10px;
+  max-width: 163px;
+  padding: 15px;
+}
+#carbonads .carbon-wrap {
+  margin-bottom: 5px;
+}
+#carbonads .carbon-img {
+  display: block;
+  padding-bottom: 5px;
+  text-align: center;
+}
+#carbonads .carbon-text {
+  color: #999;
+}
+#carbonads .carbon-text:hover {
+  color: #08c;
+  text-decoration: none;
+}
+#carbonads .carbon-poweredby {
+  display: block;
+  padding-top: 5px;
+  text-align: right;
+}
+@media (max-width: 991px) {
+  .demo-ad {
+    visibility: hidden;
+  }
+}
+@media (min-width: 992px) {
+  .demo-ad {
+    visibility: visible;
+  }
+}

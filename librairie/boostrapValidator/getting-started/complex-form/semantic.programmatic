@@ -1,0 +1,107 @@
+<div class="ui grid">
+    <div class="twelve wide column centered">
+        <form id="profileForm" class="ui form">
+            <div class="fields">
+                <div class="eight wide field">
+                    <label>First name</label>
+                    <div class="ui input icon">
+                        <input type="text" name="firstName" />
+                    </div>
+                </div>
+
+                <div class="eight wide field">
+                    <label>Last name</label>
+                    <div class="ui input icon">
+                        <input type="text" name="lastName" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="fields">
+                <div class="five wide field">
+                    <label>Cell phone</label>
+                    <div class="ui input icon">
+                        <input type="text" name="cellPhone" />
+                    </div>
+                </div>
+
+                <div class="five wide field">
+                    <label>Home phone</label>
+                    <div class="ui input icon">
+                        <input type="text" name="homePhone" />
+                    </div>
+                </div>
+
+                <div class="five wide field">
+                    <label>Office phone</label>
+                    <div class="ui input icon">
+                        <input type="text" name="officePhone" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="fields">
+                <!-- Do NOT use name="submit" or id="submit" for the Submit button -->
+                <button type="submit" class="ui primary button">Update profile</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('#profileForm').formValidation({
+        framework: 'semantic',
+        icon: {
+            valid: 'checkmark icon',
+            invalid: 'remove icon',
+            validating: 'refresh icon'
+        },
+        fields: {
+            firstName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The first name is required'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z\s]+$/,
+                        message: 'The first name can only consist of alphabetical and space'
+                    }
+                }
+            },
+            lastName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z\s]+$/,
+                        message: 'The last name can only consist of alphabetical and space'
+                    }
+                }
+            },
+            cellPhone: {
+                validators: {
+                    notEmpty: {
+                        message: 'The cell phone number is required'
+                    }
+                }
+            },
+            homePhone: {
+                validators: {
+                    notEmpty: {
+                        message: 'The home phone number is required'
+                    }
+                }
+            },
+            officePhone: {
+                validators: {
+                    notEmpty: {
+                        message: 'The office phone number is required'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

@@ -1,0 +1,22 @@
+---
+layout: demo/bootstrap
+title: Adding dynamic field
+permalink: /examples/adding-dynamic-field/different-name/bootstrap.html
+sitemap: false
+---
+
+{% include_relative bootstrap.programmatic %}
+
+<script>
+$(document).ready(function() {
+    $('#bookForm')
+        .on('added.field.fv removed.field.fv', function(e, data) {
+            var $body  = $('body'),
+                $iframe = $body.data('iframe.fv');
+            if ($iframe) {
+                // Adjust the height of iframe
+                $iframe.height($body.height());
+            }
+        });
+});
+</script>

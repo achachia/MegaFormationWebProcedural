@@ -1,0 +1,52 @@
+<form id="signinForm" method="post">
+    <div class="row">
+        <input name="username" type="text" class="u-full-width" placeholder="Username" />
+    </div>
+
+    <div class="row">
+        <input name="password" type="password" class="u-full-width" placeholder="Username" />
+    </div>
+
+    <div class="row">
+        <button type="submit" class="button-primary">Sign in</button>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#signinForm').formValidation({
+        framework: 'skeleton',
+        icon: {
+            valid: 'fa fa-check',
+            invalid: 'fa fa-times',
+            validating: 'fa fa-refresh',
+            feedback: 'fv-control-feedback'
+        },
+        fields: {
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'The username can only consist of alphabetical, number and underscore'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

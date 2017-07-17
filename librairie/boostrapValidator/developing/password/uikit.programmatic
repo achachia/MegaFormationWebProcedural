@@ -1,0 +1,64 @@
+<form id="passwordUikitForm" class="uk-form uk-form-horizontal">
+    <div class="uk-form-row">
+        <label class="uk-form-label">Password</label>
+        <div class="uk-form-controls">
+            <input type="password" name="pwd" />
+        </div>
+    </div>
+
+    <div class="uk-form-row">
+        <label class="uk-form-label"></label>
+        <div class="uk-form-controls">
+            <button type="submit" class="uk-button uk-button-primary">Validate</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    FormValidation.Validator.password = {
+        validate: function(validator, $field, options) {
+            var value = $field.val();
+            if (value === '') {
+                return true;
+            }
+
+            if (value.length < 8) {
+                return false;
+            }
+            if (value === value.toLowerCase()) {
+                return false;
+            }
+            if (value === value.toUpperCase()) {
+                return false;
+            }
+            if (value.search(/[0-9]/) < 0) {
+                return false;
+            }
+
+            return true;
+        }
+    };
+
+    $('#passwordUikitForm').formValidation({
+        framework: 'uikit',
+        icon: {
+            valid: 'fa fa-check',
+            invalid: 'fa fa-times',
+            validating: 'fa fa-refresh'
+        },
+        fields: {
+            pwd: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and cannot be empty'
+                    },
+                    password: {
+                        message: 'The password is not valid'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

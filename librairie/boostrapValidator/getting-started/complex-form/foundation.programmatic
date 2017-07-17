@@ -1,0 +1,103 @@
+<form id="profileForm" class="form-horizontal">
+    <div class="row">
+        <div class="small-2 columns">
+            <label class="right">Full name</label>
+        </div>
+
+        <div class="small-5 columns">
+            <input type="text" name="firstName" placeholder="First name" />
+        </div>
+
+        <div class="small-5 columns">
+            <input type="text" name="lastName" placeholder="Last name" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-2 columns">
+            <label class="right">Phone number</label>
+        </div>
+
+        <div class="small-3 columns">
+            <input type="text" name="cellPhone" placeholder="Cell" />
+        </div>
+
+        <div class="small-3 columns">
+            <input type="text" name="homePhone" placeholder="Home" />
+        </div>
+
+        <div class="small-3 small-pull-1 columns">
+            <input type="text" name="officePhone" placeholder="Office" />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="small-10 small-push-2 columns">
+            <!-- Do NOT use name="submit" or id="submit" for the Submit button -->
+            <button type="submit" class="button">Update profile</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#profileForm').formValidation({
+        framework: 'foundation',
+        icon: {
+            valid: 'fa fa-check',
+            invalid: 'fa fa-times',
+            validating: 'fa fa-refresh'
+        },
+        fields: {
+            firstName: {
+                row: '.small-5',
+                validators: {
+                    notEmpty: {
+                        message: 'The first name is required'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z\s]+$/,
+                        message: 'The first name can only consist of alphabetical and space'
+                    }
+                }
+            },
+            lastName: {
+                row: '.small-5',
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z\s]+$/,
+                        message: 'The last name can only consist of alphabetical and space'
+                    }
+                }
+            },
+            cellPhone: {
+                row: '.small-3',
+                validators: {
+                    notEmpty: {
+                        message: 'The cell phone number is required'
+                    }
+                }
+            },
+            homePhone: {
+                row: '.small-3',
+                validators: {
+                    notEmpty: {
+                        message: 'The home phone number is required'
+                    }
+                }
+            },
+            officePhone: {
+                row: '.small-3',
+                validators: {
+                    notEmpty: {
+                        message: 'The office phone number is required'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

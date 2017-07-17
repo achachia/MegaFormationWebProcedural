@@ -1,0 +1,35 @@
+---
+layout: default
+title: Playing with Summernote
+permalink: /examples/summernote/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Playing with Summernote</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>This example shows how to use FormValidation with <a href="http://summernote.org">Summernote</a> plugin.</p>
+                <div class="doc-alert doc-alert-info">
+                    You should look at the <a href="/examples#compatibility">basic principles</a> when integrating FormValidation with other plugins
+                </div>
+
+                <div class="doc-alert doc-alert-info">
+                    Instead of using the <a href="/validators/callback/">callback</a> validator as seen in this example, you can <a href="/examples/modifying-value-before-validating/#using-with-wysiwyg-editors">use</a>
+                    the <a href="/settings/#validator-transformer">transformer</a> option to get the raw text provided by the editor before doing validations
+                </div>
+
+                {% include demo/tabs.html id="basic" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

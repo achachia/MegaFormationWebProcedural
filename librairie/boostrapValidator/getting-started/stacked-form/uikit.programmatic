@@ -1,0 +1,96 @@
+<form id="productForm" class="uk-form uk-form-stacked">
+    <div class="uk-form-row">
+        <label class="uk-form-label">Product name</label>
+        <div class="uk-form-controls">
+            <input name="name" type="text" class="uk-width-1-1" />
+        </div>
+    </div>
+
+    <div class="uk-form-row">
+        <label class="uk-form-label">Price</label>
+        <div class="uk-form-controls">
+            <input name="price" type="text" class="uk-form-width-small" />
+        </div>
+    </div>
+
+    <div class="uk-form-row">
+        <label class="uk-form-label">Size</label>
+        <div class="uk-form-controls">
+            <input type="checkbox" name="size[]" value="s" /> <label>S</label><br />
+            <input type="checkbox" name="size[]" value="m" /> <label>M</label><br />
+            <input type="checkbox" name="size[]" value="l" /> <label>L</label><br />
+            <input type="checkbox" name="size[]" value="xl" /> <label>XL</label>
+        </div>
+    </div>
+
+    <div class="uk-form-row">
+        <label class="uk-form-label">Available in store</label>
+        <div class="uk-form-controls">
+            <label><input type="radio" name="availability" value="yes" /> Yes</label>
+            <label><input type="radio" name="availability" value="no" /> No</label>
+        </div>
+    </div>
+
+    <div class="uk-form-row">
+        <label class="uk-form-label"></label>
+        <div class="uk-form-controls">
+            <!-- Do NOT use name="submit" or id="submit" for the Submit button -->
+            <button type="submit" class="uk-button uk-button-primary">Add product</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#productForm').formValidation({
+        framework: 'uikit',
+        icon: {
+            valid: 'uk-icon-check',
+            invalid: 'uk-icon-times',
+            validating: 'uk-icon-refresh'
+        },
+        fields: {
+            name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The name is required'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The name must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'The name can only consist of alphabetical, number and underscore'
+                    }
+                }
+            },
+            price: {
+                validators: {
+                    notEmpty: {
+                        message: 'The price is required'
+                    },
+                    numeric: {
+                        message: 'The price must be a number'
+                    }
+                }
+            },
+            'size[]': {
+                validators: {
+                    notEmpty: {
+                        message: 'The size is required'
+                    }
+                }
+            },
+            availability: {
+                validators: {
+                    notEmpty: {
+                        message: 'The availability option is required'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

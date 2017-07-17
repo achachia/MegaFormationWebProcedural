@@ -1,0 +1,93 @@
+---
+layout: default
+title: Conditional validation
+permalink: /examples/conditional-validation/
+image: /examples/conditional-validation/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Conditional validation</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <p>There is a common case that a field validator rules depend on additional conditions. For example,
+                    when you stop using a software or an online service, you might be asked for the reason.</p>
+                    <p>You can pick one from the given list, or choose a kind of "Other" checkbox. In the case that checkbox is selected,
+                    you have to indicate the specific reason. The reason is only required if you don't choose given one.</p>
+
+                    <p>This example suggests two approaches that you can use for dealing with these kind of conditional validation.</p>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Using callback validator</h2>
+
+                    <p>The first solution is to use the <a href="/validators/callback/">callback</a> validator.</p>
+                    <p>The <code>callback</code> function simply ignores validation logic and returns <code>true</code> if the conditions don't happen. Otherwise, perform your specific logic to check the field validity.</p>
+                    <p>One more thing, even when the field validation is ignored, the plugin still adds the success class to the container as well as shows the tick icon.</p>
+                    <p>In this case, you can trigger the event to mark the field as ignored. This trick is described in the <a href="/examples/hiding-success-class/">Hiding success class</a> example.</p>
+
+                    {% include demo/tabs.html id="callback" frameworks="bootstrap" dir="callback" codes="programmatic" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Enabling validators when meeting conditions</h2>
+
+                    <p>The second solution uses the <a href="/settings#field-enabled">enabled</a> option and <a href="/api#enable-field-validators">enableFieldValidators()</a> method.</p>
+                    <p>Initially, the field validators are disabled by setting <code>enabled: false</code>:</p>
+
+{% highlight javascript %}
+$('#profileForm').formValidation({
+    fields: {
+        driverLicense: {
+            // Disable validators
+            enabled: false,
+            validators: {
+                ...
+            }
+        }
+    }
+});
+{% endhighlight %}
+
+                    <p>Later, when conditions happen, these validators can be turned on (off) by calling the <code>enableFieldValidators()</code> method:</p>
+
+{% highlight javascript %}
+$('#profileForm').formValidation('enableFieldValidators', 'driverLicense', true/false);
+
+// Or the same way
+$('#profileForm').data('formValidation').enableFieldValidators('driverLicense', true/false);
+{% endhighlight %}
+
+                    {% include demo/tabs.html id="enabling" frameworks="bootstrap" dir="enabling-validators" codes="programmatic" %}
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Related examples</h2>
+
+                    <ul class="doc-list">
+                        <li><a href="/examples/enable-validator/">Enabling validator</a></li>
+                        <li><a href="/examples/switching-validators-same-field/">Switching validators on the same field</a></li>
+                    </ul>
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                <div id="toc" class="doc-toc"></div>
+
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

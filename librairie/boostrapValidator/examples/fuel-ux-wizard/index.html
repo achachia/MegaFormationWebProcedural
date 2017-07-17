@@ -1,0 +1,35 @@
+---
+layout: default
+title: Playing with Fuel UX Wizard
+permalink: /examples/fuel-ux-wizard/
+image: /examples/fuel-ux-wizard/cover.png
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Playing with Fuel UX Wizard</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>The following example demonstrates how to use FormValidation to validate panels structured by <a href="http://getfuelux.com/javascript.html#wizard">Fuel UX Wizard</a>.</p>
+                <p>We need to trigger the <code>actionclicked.fu.wizard</code> and <code>finished.fu.wizard</code> <a href="http://getfuelux.com/javascript.html#wizard-usage-events">events</a> to validate selected panel.</p>
+
+                <div class="doc-alert doc-alert-info">
+                    You should look at the <a href="/examples#wizard">wizard</a> section when integrating FormValidation with wizard-like components
+                </div>
+
+                <p>If you want to use more <a href="http://getfuelux.com/javascript.html">Fuel UX controls</a>, look at this <a href="/examples/fuel-ux/">example</a>.</p>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,53 @@
+---
+layout: default
+title: Examples
+permalink: /examples/
+prev:
+    url: /addons/
+    title: Add-ons
+next:
+    url: /developing/
+    title: Developing
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Examples</h1>
+        <p>A collection of useful examples you can play with</p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                {% include_relative _faq.html %}
+                <div class="doc-hr"></div>
+
+                {% include_relative _basic.html %}
+                <div class="doc-hr"></div>
+
+                {% include_relative _advance.html %}
+                <div class="doc-hr"></div>
+
+                {% include_relative _server.html %}
+                <div class="doc-hr"></div>
+
+                {% include_relative _compatibility.html %}
+                <div class="doc-hr"></div>
+
+                {% include_relative _wizard.html %}
+                <div class="doc-hr"></div>
+
+                {% include_relative _framework.html %}
+
+                {% include pagination.html %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                <div id="toc" class="doc-toc"></div>
+
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

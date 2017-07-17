@@ -1,0 +1,22 @@
+---
+layout: demo/bootstrap
+title: Adding warning validation state
+permalink: /examples/adding-warning-validation-state/bootstrap.html
+sitemap: false
+---
+
+{% include_relative bootstrap.programmatic %}
+
+<script>
+$(document).ready(function() {
+    $('#registerForm')
+        .on('success.validator.fv err.validator.fv', function(e, data) {
+            var $body  = $('body'),
+                $iframe = $body.data('iframe.fv');
+            if ($iframe) {
+                // Adjust the height of iframe
+                $iframe.height($body.height());
+            }
+        });
+});
+</script>

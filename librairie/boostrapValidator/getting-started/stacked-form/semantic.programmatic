@@ -1,0 +1,107 @@
+<div class="ui grid">
+    <div class="twelve wide column centered">
+        <form id="productForm" class="ui form">
+            <div class="field">
+                <label>Product name</label>
+                <div class="ui input icon">
+                    <input type="text" name="name" />
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Price</label>
+                <div class="ui input icon">
+                    <input type="text" name="price" />
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Size</label>
+                <div class="ui input icon">
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="size[]" value="s" /> <label>S</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="size[]" value="m" /> <label>M</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="size[]" value="l" /> <label>L</label>
+                    </div>
+                    <div class="ui checkbox">
+                        <input type="checkbox" name="size[]" value="xl" /> <label>XL</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Available in store</label>
+                <div class="ui input icon">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="availability" value="yes" /> <label>Yes</label>
+                    </div>
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="availability" value="no" /> <label>No</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Do NOT use name="submit" or id="submit" for the Submit button -->
+            <button type="submit" class="ui primary button">Add product</button>
+        </form>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('#productForm').formValidation({
+        framework: 'semantic',
+        icon: {
+            valid: 'checkmark icon',
+            invalid: 'remove icon',
+            validating: 'refresh icon'
+        },
+        fields: {
+            name: {
+                validators: {
+                    notEmpty: {
+                        message: 'The name is required'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The name must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'The name can only consist of alphabetical, number and underscore'
+                    }
+                }
+            },
+            price: {
+                validators: {
+                    notEmpty: {
+                        message: 'The price is required'
+                    },
+                    numeric: {
+                        message: 'The price must be a number'
+                    }
+                }
+            },
+            'size[]': {
+                validators: {
+                    notEmpty: {
+                        message: 'The size is required'
+                    }
+                }
+            },
+            availability: {
+                validators: {
+                    notEmpty: {
+                        message: 'The availability option is required'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

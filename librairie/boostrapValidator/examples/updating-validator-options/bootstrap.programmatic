@@ -1,0 +1,140 @@
+<form id="applyForm" method="post" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Full name</label>
+        <div class="col-xs-5">
+            <input class="form-control" name="fullName" type="text" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">Email</label>
+        <div class="col-xs-5">
+            <input class="form-control" name="email" type="text" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">File type</label>
+        <div class="col-xs-6">
+            <select class="form-control" name="fileType">
+                <option value="">Select a file type</option>
+                <option value="pdf">CV (.pdf)</option>
+                <option value="zip">Sample code (.zip)</option>
+                <option value="png">Sample design (.png)</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-xs-3 control-label">File</label>
+        <div class="col-xs-6">
+            <input class="form-control" name="fileName" type="file" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-xs-5 col-xs-offset-3">
+            <button type="submit" class="btn btn-default">Apply for job</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#applyForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                fullName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The full name is required'
+                        }
+                    }
+                },
+                email: {
+                    validators: {
+                        notEmpty: {
+                            message: 'The email address is required'
+                        },
+                        emailAddress: {
+                            message: 'The email address is not valid'
+                        }
+                    }
+                },
+                fileType: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please choose a file type'
+                        }
+                    }
+                },
+                fileName: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please choose a file to upload'
+                        },
+                        file: {
+                            extension: 'pdf',
+                            type: 'application/pdf',
+                            maxSize: 2 * 1024 * 1024,
+                            message: 'The file must be in .pdf format and must not exceed 2MB in size'
+                        }
+                    }
+                }
+            }
+        })
+        // When the file type is changed
+        .on('change', '[name="fileType"]', function(e) {
+            var fileType = $(this).val(),
+                maxSize  = 2 * 1024 * 1024,
+                type,
+                extension,
+                message;
+
+            if (fileType === '') {
+                return;
+            }
+
+            switch (fileType) {
+                case 'png':
+                    type      = 'image/png';
+                    extension = 'png';
+                    maxSize   = 10 * 1024 * 1024;
+                    message   = 'The file must be in .png format and must not exceed 10MB in size';
+                    break;
+
+                case 'zip':
+                    type      = 'application/zip';
+                    extension = 'zip';
+                    maxSize   = 5 * 1024 * 1024;
+                    message   = 'The file must be in .zip format and must not exceed 5MB in size';
+                    break;
+
+                case 'pdf':
+                default:
+                    type      = 'application/pdf';
+                    extension = 'pdf';
+                    maxSize   = 2 * 1024 * 1024;
+                    message   = 'The file must be in .pdf format and must not exceed 2MB in size';
+                    break;
+            }
+
+            $('#applyForm')
+                // Update options
+                .formValidation('updateOption', 'fileName', 'file', 'type', type)
+                .formValidation('updateOption', 'fileName', 'file', 'extension', extension)
+
+                // Update message
+                .formValidation('updateMessage', 'fileName', 'file', message)
+
+                // You might need to revalidate field
+                .formValidation('revalidateField', 'fileName');
+        });
+});
+</script>

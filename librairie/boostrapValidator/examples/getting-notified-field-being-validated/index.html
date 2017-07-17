@@ -1,0 +1,203 @@
+---
+layout: default
+title: Getting notified while field is being validated
+permalink: /examples/getting-notified-field-being-validated/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Getting notified while field is being validated</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <section>
+                    <p>When using either <a href="/validators/callback/">callback</a>, <a href="/validators/promise/">promise</a> or <a href="/validators/remote/">remote</a>
+                        validator, your validation logic might take time. For instance, the <a href="/validators/remote/">remote</a> validator connects to the server side
+                        and executes a few of database queries to check whether or not the field is valid. These kind of process could force the user to wait for a busy processing.
+                        User even don't have idea about what is happening.
+                    </p>
+
+                    <p>This example introduces two ways to get user notified while the validation is being processed. It enhances the user experience of the application.</p>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Setting validating icon</h2>
+
+                    <p>The first and most simple way is using a loading icon. It can be set via the <a href="/settings/#form-icon">icon</a> option:</p>
+
+{% highlight javascript %}
+$(form).formValidation({
+    icon: {
+        valid: 'glyphicon glyphicon-ok',
+        invalid: 'glyphicon glyphicon-remove',
+        validating: 'glyphicon glyphicon-refresh'
+    }
+});
+{% endhighlight %}
+
+                    <p>The <code>icon.validating</code> icon then is shown up when the field is being validated.</p>
+
+                    <p>In the following table, you can find the icon provided by supported frameworks:</p>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Icon sets</th>
+                                    <th>Icon classes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><a href="http://getbootstrap.com/components/#glyphicons">Glyphicons</a></td>
+                                    <td>
+{% highlight javascript %}
+icon: {
+    valid: 'glyphicon glyphicon-ok',
+    invalid: 'glyphicon glyphicon-remove',
+    validating: 'glyphicon glyphicon-refresh'
+}
+{% endhighlight %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="http://fontawesome.io/icons">FontAwesome</a></td>
+                                    <td>
+{% highlight javascript %}
+icon: {
+    valid: 'fa fa-check',
+    invalid: 'fa fa-times',
+    validating: 'fa fa-refresh'
+}
+{% endhighlight %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="http://semantic-ui.com/elements/icon.html">Semantic icons</a></td>
+                                    <td>
+{% highlight javascript %}
+icon: {
+    valid: 'checkmark icon',
+    invalid: 'remove icon',
+    validating: 'refresh icon'
+}
+{% endhighlight %}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><a href="http://getuikit.com/docs/icon.html">UIKit</a></td>
+                                    <td>
+{% highlight javascript %}
+icon: {
+    valid: 'uk-icon-check',
+    invalid: 'uk-icon-times',
+    validating: 'uk-icon-refresh'
+}
+{% endhighlight %}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p>Here is the result:</p>
+
+                    <p class="text-center">
+                        <img src="using-validating-icon.png" alt="Using validating icon" />
+                    </p>
+                </section>
+
+                <div class="doc-hr"></div>
+
+                <section>
+                    <h2>Listening event</h2>
+
+                    <p>When the plugin starts validating field, it triggers the <a href="/settings/#event-field">status.field.fv</a> event:</p>
+
+{% highlight javascript %}
+$(form)
+    .formValidation({
+        ...
+    })
+    .on('status.field.fv', function(e, data) {
+        // data.field is the field name
+        // data.element is the field element
+        // data.fv is the plugin instance
+        // data.status is the field status which is 'VALIDATING' when the validation starts
+    });
+{% endhighlight %}
+
+                    <p>By listening this event, we can do whatever we want to inform user about the validation process.
+                        To make it simple, I am going to use the <a href="http://getbootstrap.com/components/#progress">Bootstrap progress bar</a> component which
+                        is shown right after the validation begins its job. It is also hidden when the validation process completes.</p>
+
+                    <div class="doc-alert doc-alert-info">
+                        In this case, I assume that you're using the <a href="http://getbootstrap.com">Bootstrap</a> framework.
+                        Of course, you can use other progress bar component provided by the <a href="http://foundation.zurb.com/docs/components/progress_bars.html">Foundation</a>,
+                        <a href="http://semantic-ui.com/modules/progress.html">Semantic UI</a> or <a href="http://getuikit.com/docs/progress.html">UIKit</a> frameworks.
+                    </div>
+
+                    <p>The form markup:</p>
+
+{% highlight html %}
+<div class="form-group">
+    <label class="col-lg-3 control-label">Username</label>
+    <div class="col-lg-5">
+        <input type="text" class="form-control" name="username" autocomplete="off" />
+
+        <!-- The progress bar is hidden initially -->
+        <div class="progress" id="progressBar" style="margin: 5px 0 0 0; display: none;">
+            <div class="progress-bar progress-bar-success progress-bar-striped active" style="width: 100%"></div>
+        </div>
+    </div>
+</div>
+{% endhighlight %}
+
+                    <p>The Javascript code:</p>
+
+{% highlight javascript %}
+$(form)
+    .formValidation({
+        fields: {
+            username: {
+                validators: {
+                    remote: {
+                        type: 'POST',
+                        url: '/path/to/your/api/',
+                        message: 'The username is not available'
+                    }
+                }
+            }
+        }
+    })
+    .on('status.field.fv', function(e, data) {
+        if (data.field === 'username') {        // Change “username” to your field name
+            (data.status === 'VALIDATING')
+                ? $('#progressBar').show()      // Show the progress bar while we are validating
+                : $('#progressBar').hide();     // Otherwise, hide it
+        }
+    });
+{% endhighlight %}
+
+                    <p>The screenshot below demonstrates how it looks:</p>
+
+                    <p class="text-center">
+                        <img src="listening-event.png" alt="Listening event" />
+                    </p>
+                </section>
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                <div id="toc" class="doc-toc"></div>
+
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

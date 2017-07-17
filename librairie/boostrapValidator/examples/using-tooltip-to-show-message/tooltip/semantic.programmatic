@@ -1,0 +1,163 @@
+<form id="registrationForm" class="ui grid form fv-form-horizontal">
+    <div class="row field">
+        <label class="four wide column">Full name</label>
+        <div class="six wide column">
+            <div class="ui input icon">
+                <input name="firstName" type="text" placeholder="First name" />
+            </div>
+        </div>
+        <div class="six wide column">
+            <div class="ui input icon">
+                <input name="lastName" type="text" placeholder="Last name" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row field">
+        <label class="four wide column">Username</label>
+        <div class="eight wide column">
+            <div class="ui input icon">
+                <input name="username" type="text" placeholder="Username" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row field">
+        <label class="four wide column">Email address</label>
+        <div class="eight wide column">
+            <div class="ui input icon">
+                <input name="email" type="text" placeholder="Email address" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row field">
+        <label class="four wide column">Password</label>
+        <div class="eight wide column">
+            <div class="ui input icon">
+                <input name="password" type="password" placeholder="Password" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row field">
+        <label class="four wide column">Gender</label>
+        <div class="eight wide column">
+            <div class="ui input icon">
+                <div class="ui radio checkbox">
+                    <input name="gender" type="radio" value="male" /> <label>Male</label>
+                </div>
+                <div class="ui radio checkbox">
+                    <input name="gender" type="radio" value="female" /> <label>Female</label>
+                </div>
+                <div class="ui radio checkbox">
+                    <input name="gender" type="radio" value="other" /> <label>Other</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row field">
+        <label class="four wide column">Date of birth</label>
+        <div class="four wide column">
+            <div class="ui input icon">
+                <input type="text" name="birthday" placeholder="YYYY/MM/DD" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <label class="four wide column"></label>
+        <div class="eight wide column">
+            <!-- Do NOT use name="submit" or id="submit" for the Submit button -->
+            <button type="submit" class="ui primary button">Submit</button>
+        </div>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#registrationForm').formValidation({
+        framework: 'semantic',
+        icon: {
+            valid: 'checkmark icon',
+            invalid: 'remove icon',
+            validating: 'refresh icon'
+        },
+        err: {
+            container: 'tooltip'
+        },
+        fields: {
+            firstName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The first name is required'
+                    }
+                }
+            },
+            lastName: {
+                validators: {
+                    notEmpty: {
+                        message: 'The last name is required'
+                    }
+                }
+            },
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: 'The username can only consist of alphabetical, number, dot and underscore'
+                    }
+                }
+            },
+            email: {
+                validators: {
+                    notEmpty: {
+                        message: 'The email address is required'
+                    },
+                    emailAddress: {
+                        message: 'The input is not a valid email address'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required'
+                    },
+                    different: {
+                        field: 'username',
+                        message: 'The password cannot be the same as username'
+                    }
+                }
+            },
+            gender: {
+                validators: {
+                    notEmpty: {
+                        message: 'The gender is required'
+                    }
+                }
+            },
+            birthday: {
+                validators: {
+                    notEmpty: {
+                        message: 'The date of birth is required'
+                    },
+                    date: {
+                        format: 'YYYY/MM/DD',
+                        message: 'The date of birth is not valid'
+                    }
+                }
+            }
+        }
+    });
+});
+</script>

@@ -1,0 +1,331 @@
+<section>
+    <h2>Usage</h2>
+    <p>It takes only 3 steps to use the plugin:</p>
+
+    <!-- including -->
+    <section>
+        <h3>Including library</h3>
+
+        <p>Choose the framework you are using to see CSS, Javascript files that need to be included in your page (Assuming
+        frameworks and FormValidation are placed in the <code>vendor</code> directory. You might need change the path to these files)</p>
+
+        <div class="doc-alert doc-alert-info">
+            FormValidation requires <a href="http://jquery.com/">jQuery</a> v1.9.1 or higher
+        </div>
+
+        <div class="doc-demo">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#including-bootstrap-tab" data-toggle="tab">Bootstrap</a></li>
+                <li><a href="#including-foundation-tab" data-toggle="tab">Foundation</a></li>
+                <li><a href="#including-pure-tab" data-toggle="tab">Pure</a></li>
+                <li><a href="#including-semantic-tab" data-toggle="tab">Semantic</a></li>
+                <li><a href="#including-uikit-tab" data-toggle="tab">UIKit</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="including-bootstrap-tab">
+{% highlight html %}
+<!-- Bootstrap CSS v3.0.0 or higher -->
+<link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css">
+
+<!-- FormValidation CSS file -->
+<link rel="stylesheet" href="/vendor/formvalidation/dist/css/formValidation.min.css">
+
+<!-- jQuery v1.9.1 or higher -->
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- FormValidation plugin and the class supports validating Bootstrap form -->
+<script src="/vendor/formvalidation/dist/js/formValidation.min.js"></script>
+<script src="/vendor/formvalidation/dist/js/framework/bootstrap.min.js"></script>
+{% endhighlight %}
+
+                    <div class="doc-alert doc-alert-warning">
+                        <p>Don't confuse bootstrap(.min).js file provided by the Bootstrap framework with
+                        bootstrap(.min).js provided by FormValidation which is placed inside the formvalidation/dist/js/framework directory.</p>
+                        <p>They are two different files and both of them need to be included as mentioned above.</p>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="including-foundation-tab">
+{% highlight html %}
+<!-- Foundation CSS -->
+<link rel="stylesheet" href="/vendor/foundation/css/normalize.min.css">
+<link rel="stylesheet" href="/vendor/foundation/css/foundation.min.css">
+
+<!-- FormValidation CSS file -->
+<link rel="stylesheet" href="/vendor/formvalidation/dist/css/formValidation.min.css">
+
+<!-- jQuery v1.9.1 or higher -->
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+
+<!-- Foundation JS file -->
+<script src="/vendor/foundation/js/vendor/modernizr.js"></script>
+<script src="/vendor/foundation/js/foundation/foundation.js"></script>
+<script src="/vendor/foundation/js/foundation/foundation.tooltip.js"></script>
+
+<!-- FormValidation plugin and the class supports validating Foundation form -->
+<script src="/vendor/formvalidation/dist/js/formValidation.min.js"></script>
+<script src="/vendor/formvalidation/dist/js/framework/foundation.min.js"></script>
+{% endhighlight %}
+
+                    <div class="doc-alert doc-alert-warning">
+                        <p>Don't confuse foundation(.min).js file provided by the Foundation framework with
+                            foundation(.min).js provided by FormValidation which is placed inside the formvalidation/dist/js/framework directory.</p>
+                        <p>They are two different files and both of them need to be included as mentioned above.</p>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="including-pure-tab">
+{% highlight html %}
+<!-- Pure CSS -->
+<link rel="stylesheet" href="/vendor/pure/pure-min.css">
+<!--[if lte IE 8]><link rel="stylesheet" href="/vendor/pure/grids-responsive-old-ie-min.css"><![endif]-->
+<!--[if gt IE 8]><!--><link rel="stylesheet" href="/vendor/pure/grids-responsive-min.css"><!--<![endif]-->
+
+<!-- FormValidation CSS file -->
+<link rel="stylesheet" href="/vendor/formvalidation/dist/css/formValidation.min.css">
+
+<!-- jQuery v1.9.1 or higher -->
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+
+<!-- FormValidation plugin and the class supports validating Pure form -->
+<script src="/vendor/formvalidation/dist/js/formValidation.min.js"></script>
+<script src="/vendor/formvalidation/dist/js/framework/pure.min.js"></script>
+{% endhighlight %}
+                </div>
+
+                <div class="tab-pane" id="including-semantic-tab">
+{% highlight html %}
+<!-- Semantic CSS -->
+<link rel="stylesheet" href="/vendor/semantic-ui/semantic.min.css">
+
+<!-- FormValidation CSS file -->
+<link rel="stylesheet" href="/vendor/formvalidation/dist/css/formValidation.min.css">
+
+<!-- jQuery v1.9.1 or higher -->
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+
+<!-- Semantic JS -->
+<script src="/vendor/semantic-ui/semantic.min.js"></script>
+
+<!-- FormValidation plugin and the class supports validating Semantic form -->
+<script src="/vendor/formvalidation/dist/js/formValidation.min.js"></script>
+<script src="/vendor/formvalidation/dist/js/framework/semantic.min.js"></script>
+{% endhighlight %}
+
+                    <div class="doc-alert doc-alert-warning">
+                        <p>Don't confuse semantic(.min).js file provided by the Semantic framework with
+                            semantic(.min).js provided by FormValidation which is placed inside the formvalidation/dist/js/framework directory.</p>
+                        <p>They are two different files and both of them need to be included as mentioned above.</p>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="including-uikit-tab">
+{% highlight html %}
+<!-- UIKit CSS -->
+<link rel="stylesheet" href="/vendor/uikit/css/uikit.min.css">
+
+<!-- FormValidation CSS file -->
+<link rel="stylesheet" href="/vendor/formvalidation/dist/css/formValidation.min.css">
+
+<!-- jQuery v1.9.1 or higher -->
+<script type="text/javascript" src="/vendor/jquery/jquery.min.js"></script>
+
+<!-- UIKit JS -->
+<script src="/vendor/uikit/js/uikit.min.js"></script>
+
+<!-- FormValidation plugin and the class supports validating Semantic form -->
+<script src="/vendor/formvalidation/dist/js/formValidation.min.js"></script>
+<script src="/vendor/formvalidation/dist/js/framework/uikit.min.js"></script>
+{% endhighlight %}
+
+                    <div class="doc-alert doc-alert-warning">
+                        <p>Don't confuse uikit(.min).js file provided by the UIKit framework with
+                            uikit(.min).js provided by FormValidation which is placed inside the formvalidation/dist/js/framework directory.</p>
+                        <p>They are two different files and both of them need to be included as mentioned above.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p>If you want to use the default message translated in the <a href="#language-package">language package</a>, then finally include it:</p>
+{% highlight html %}
+<script type="text/javascript" src="/vendor/formvalidation/dist/js/language/languagecode_COUNTRYCODE.js"></script>
+{% endhighlight %}
+
+        <div class="doc-alert doc-alert-info">
+            <p>You don't need to require the <a href="#language-package">English package</a> because it is already included in the plugin. The package is available here just for translating into other languages.</p>
+        </div>
+
+        <p>The CSS and Javascript files for each framework can be downloaded directly from their official website or from CDN:</p>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Framework</th>
+                        <th><a href="https://cdnjs.com">CDNjs</a></th>
+                        <th><a href="http://www.jsdelivr.com">jsDelivr</a></th>
+                        <th><a href="http://osscdn.com">oss CDN</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><a href="http://getbootstrap.com">Bootstrap</a></td>
+                        <td><a href="https://cdnjs.com/libraries/twitter-bootstrap"><i class="fa fa-download"></i></a></td>
+                        <td><a href="http://www.jsdelivr.com/#!bootstrap"><i class="fa fa-download"></i></a></td>
+                        <td><a href="http://osscdn.com/#/bootstrap"><i class="fa fa-download"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://foundation.zurb.com/">Foundation</a></td>
+                        <td><a href="https://cdnjs.com/libraries/foundation"><i class="fa fa-download"></i></a></td>
+                        <td><a href="http://www.jsdelivr.com/#!foundation"><i class="fa fa-download"></i></a></td>
+                        <td><a href="http://osscdn.com/#/foundation"><i class="fa fa-download"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://purecss.io/">Pure</a></td>
+                        <td><a href="https://cdnjs.com/libraries/pure"><i class="fa fa-download"></i></a></td>
+                        <td><a href="http://www.jsdelivr.com/#!pure"><i class="fa fa-download"></i></a></td>
+                        <td><a href="http://osscdn.com/#/pure"><i class="fa fa-download"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://semantic-ui.com/">Semantic</a></td>
+                        <td><a href="https://cdnjs.com/libraries/semantic-ui"><i class="fa fa-download"></i></a></td>
+                        <td><a href="http://www.jsdelivr.com/#!semantic-ui"><i class="fa fa-download"></i></a></td>
+                        <td><a href="http://osscdn.com/#/semantic-ui"><i class="fa fa-download"></i></a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="http://getuikit.com/">UIKit</a></td>
+                        <td><a href="https://cdnjs.com/libraries/uikit"><i class="fa fa-download"></i></a></td>
+                        <td><a href="http://www.jsdelivr.com/#!uikit"><i class="fa fa-download"></i></a></td>
+                        <td><a href="http://osscdn.com/#/uikit"><i class="fa fa-download"></i></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div class="doc-hr-short"></div>
+
+    <!-- writing-form -->
+    <section>
+        <h3>Writing form</h3>
+        <p>If your form does NOT follow the format shown in the next section, you will see the following error in the Console window of browser:</p>
+
+{% highlight html %}
+// Chrome
+Uncaught RangeError: Maximum call stack size exceeded
+
+// Firefox
+Too much recursion error
+{% endhighlight %}
+
+        <div class="doc-alert doc-alert-info">
+            For complex form, use the <a href="/settings/#form-row-selector">row</a> option
+        </div>
+
+        <div class="doc-alert doc-alert-warning">
+            Do NOT use name="submit" or id="submit" attribute for the submit button. Otherwise, the form <a href="/examples/cant-submit-form-after-validation">can't be submitted</a> after validation
+        </div>
+
+        <p>The plugin supports all possible kind of forms, including:</p>
+
+        <h4>Stacked form</h4>
+
+        {% include demo/tabs.html id="stacked-form" frameworks="bootstrap,foundation,pure,semantic,uikit" dir="stacked-form" codes="programmatic" %}
+
+        <h4>Stacked form without labels</h4>
+
+        {% include demo/tabs.html id="no-label-form" frameworks="bootstrap,foundation,pure,semantic,uikit" dir="no-label-form" codes="programmatic" %}
+
+        <h4>Inline form</h4>
+
+        {% include demo/tabs.html id="inline-form" frameworks="bootstrap,foundation,pure,semantic,uikit" dir="inline-form" codes="programmatic" %}
+
+        <h4>Horizontal form</h4>
+
+        {% include demo/tabs.html id="horizontal-form" frameworks="bootstrap,foundation,pure,semantic,uikit" dir="horizontal-form" codes="programmatic" %}
+
+        <h4>Complex form</h4>
+
+        <p>It also supports multiple fields on the same row via the <a href="/settings/#field-row">row</a> option:</p>
+
+        {% include demo/tabs.html id="complex-form" frameworks="bootstrap,foundation,pure,semantic,uikit" dir="complex-form" codes="programmatic" %}
+    </section>
+
+    <div class="doc-hr-short"></div>
+
+    <!-- calling -->
+    <section>
+        <h3>Calling plugin</h3>
+
+        <p>Call the plugin to validate the form as following:</p>
+
+{% highlight javascript %}
+$(document).ready(function() {
+    $(formSelector).formValidation({
+        // Indicate the framework
+        // Can be bootstrap, foundation, pure, semantic, uikit
+        framework: '...',
+
+        // Other settings
+        excluded: ...,
+        icon: ...,
+        message: 'This value is not valid',
+        trigger: null,
+        fields: ...
+    });
+});
+{% endhighlight %}
+
+        <p>For example, to validate a sample signing in form with username and password fields, the plugin might be called as:</p>
+
+{% highlight javascript %}
+$(document).ready(function() {
+    $('#signinForm').formValidation({
+        // I am validating Bootstrap form
+        framework: 'bootstrap',
+
+        // Feedback icons
+        icon: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+
+        // List of fields and their validation rules
+        fields: {
+            username: {
+                validators: {
+                    notEmpty: {
+                        message: 'The username is required and cannot be empty'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: 'The username must be more than 6 and less than 30 characters long'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_]+$/,
+                        message: 'The username can only consist of alphabetical, number and underscore'
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: 'The password is required and cannot be empty'
+                    }
+                }
+            }
+        }
+    });
+});
+{% endhighlight %}
+
+        <p>Look at the <a href="/settings/">Settings</a> page to see the meaning of plugin options.</p>
+    </section>
+</section>

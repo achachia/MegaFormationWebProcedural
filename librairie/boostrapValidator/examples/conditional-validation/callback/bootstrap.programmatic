@@ -1,0 +1,82 @@
+<form id="surveyForm" method="post">
+    <div class="form-group">
+        <label class="control-label">How do you know about us?</label>
+        <div class="radio">
+            <label><input type="radio" name="channel" value="google" /> Google</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="channel" value="github" /> Github</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="channel" value="twitter" /> Twitter</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="channel" value="facebook" /> Facebook</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="channel" value="developers" /> Developers</label>
+        </div>
+        <div class="radio">
+            <label><input type="radio" name="channel" value="other" /> Other</label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Please specify it:</label>
+        <input type="text" class="form-control" name="otherChannel" />
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-default">Submit</button>
+    </div>
+</form>
+
+<script>
+$(document).ready(function() {
+    $('#surveyForm')
+        .formValidation({
+            framework: 'bootstrap',
+            icon: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                channel: {
+                    validators: {
+                        notEmpty: {
+                            message: 'Please select a channel'
+                        }
+                    }
+                },
+                otherChannel: {
+                    validators: {
+                        callback: {
+                            message: 'Please specific the channel',
+                            callback: function(value, validator, $field) {
+                                var channel = $('#surveyForm').find('[name="channel"]:checked').val();
+                                return (channel !== 'other') ? true : (value !== '');
+                            }
+                        }
+                    }
+                }
+            }
+        })
+        .on('change', '[name="channel"]', function(e) {
+            $('#surveyForm').formValidation('revalidateField', 'otherChannel');
+        })
+        .on('success.field.fv', function(e, data) {
+            if (data.field === 'otherChannel') {
+                var channel = $('#surveyForm').find('[name="channel"]:checked').val();
+                // User choose given channel
+                if (channel !== 'other') {
+                    // Remove the success class from the container
+                    data.element.closest('.form-group').removeClass('has-success');
+
+                    // Hide the tick icon
+                    data.element.data('fv.icon').hide();
+                }
+            }
+        });
+});
+</script>

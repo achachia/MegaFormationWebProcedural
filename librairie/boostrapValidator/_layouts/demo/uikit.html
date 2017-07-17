@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article#">
+    {% include demo/head.html %}
+
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/uikit/2.13.1/css/uikit.min.css">
+    <link rel="stylesheet" href="/vendor/formvalidation/css/formValidation.min.css">
+    <link rel="stylesheet" href="/asset/css/demo.css">
+
+    <script src="//cdn.jsdelivr.net/uikit/2.13.1/js/uikit.min.js"></script>
+    <script src="/vendor/formvalidation/js/formValidation.min.js"></script>
+    <script src="/vendor/formvalidation/js/framework/uikit.min.js"></script>
+</head>
+<body class="demo-uikit">
+    <div class="uk-grid">
+        <div class="uk-width-3-4" id="demoContainer">
+            {{ content }}
+        </div>
+
+        <div class="uk-width-1-4">
+            <div class="demo-ad">{% include ad.html %}</div>
+        </div>
+    </div>
+
+<script>
+{% include demo/foot.js %}
+</script>
+</body>
+</html>

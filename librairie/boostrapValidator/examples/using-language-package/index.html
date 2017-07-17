@@ -1,0 +1,45 @@
+---
+layout: default
+title: Using language package
+permalink: /examples/using-language-package/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Using language package</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>The default messages have been translated into <a href="/getting-started#language-packages">many languages</a>, thank for all of awesome contributors.</p>
+                <p>In this example, I am going to show you how easy to use additional language package.</p>
+
+                <div class="doc-alert doc-alert-info">
+                    The <a href="/addons/i18n/">i18n</a> add-on provides the ability of using multiple languages
+                </div>
+
+                <p>First, including the language package, right after the plugin script:</p>
+
+{% highlight html %}
+<script type="text/javascript" src="/vendor/formvalidation/dist/js/formValidation.js"></script>
+<script type="text/javascript" src="/vendor/formvalidation/dist/js/framework/the-framework.js"></script>
+
+<script type="text/javascript" src="/vendor/formvalidation/dist/js/language/languagecode_COUNTRYCODE.js"></script>
+{% endhighlight %}
+
+                <p>When calling the plugin, <code>.formValidation({ locale: 'languagecode_COUNTRYCODE' })</code>, just don't set the <code>message</code> option. The messages then are taken from the translation package.</p>
+
+                <p>The working example below shows an usage of French language package:</p>
+
+                {% include demo/tabs.html id="demo" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

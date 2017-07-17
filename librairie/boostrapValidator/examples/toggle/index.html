@@ -1,0 +1,36 @@
+---
+layout: default
+title: Toggling field
+permalink: /examples/toggle/
+---
+
+<div class="doc-content-container">
+    <div class="doc-heading">
+        <h1>Toggling field</h1>
+        <p>&larr; <a href="/examples/">Examples</a></p>
+        {% include share.html %}
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <p>FormValidation does not validate the fields which:</p>
+
+                <ul class="doc-list">
+                    <li>are disabled</li>
+                    <li>are hidden</li>
+                    <li>are not visible</li>
+                </ul>
+
+                <p>The following example shows an example of toggling field validator.</p>
+                <p>Try to click the <strong>Add more info</strong> or <strong>Add more phone numbers</strong> button to enable/disable the additional fields. Also, look at state of the <strong>Validate</strong> button based on the validity of additional fields.</p>
+
+                {% include demo/tabs.html id="basic" frameworks="bootstrap" codes="programmatic" %}
+            </div>
+
+            <div class="col-md-3 hidden-print hidden-xs hidden-sm">
+                {% include ad.html %}
+            </div>
+        </div>
+    </div>
+</div>

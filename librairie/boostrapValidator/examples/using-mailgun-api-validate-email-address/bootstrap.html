@@ -1,0 +1,45 @@
+---
+layout: demo/bootstrap
+title: Using Mailgun API to validate email address
+permalink: /examples/using-mailgun-api-validate-email-address/bootstrap.html
+image: /examples/using-mailgun-api-validate-email-address/cover.png
+sitemap: false
+---
+
+{% include_relative bootstrap.programmatic %}
+
+<script>
+$(document).ready(function() {
+    $('#emailForm')
+        .on('success.field.fv', function(e, data) {
+            var $body   = $('body'),
+                $iframe = $body.data('iframe.fv');
+            if ($iframe) {
+                // Adjust the height of iframe
+                $iframe.height($body.get(0).clientHeight);
+            }
+        });
+});
+
+function revalidateEmailAddress(value, $icon) {
+    var $form = $('form');
+    $form.data('currentResultIcon', $icon);
+
+    if (!$form.data('__triggerEvent')) {
+        $form
+            .data('__triggerEvent', true)
+            .on('err.field.fv', function(e, data) {
+                $form.data('currentResultIcon').removeClass('fa-check fa-times').addClass('fa-times');
+            })
+            .on('success.field.fv', function(e, data) {
+                $form.data('currentResultIcon').removeClass('fa-check fa-times').addClass('fa-check');
+            });
+    }
+
+    $form
+        .find('input[name="email"]')
+            .val(value)
+            .end()
+        .formValidation('revalidateField', 'email');
+}
+</script>

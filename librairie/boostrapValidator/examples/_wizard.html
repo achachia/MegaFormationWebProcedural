@@ -1,0 +1,18 @@
+<section>
+    <h2>Wizard</h2>
+
+    <p>Using FormValidation, you can validate the wizard-like interfaces such as tabs, collapsible panels, accordions.</p>
+    <p>When using these kind of components, the form fields are split into multiple regions which there is only active, visible one at any time.
+    By default, the invisible fields belonging to inactive regions will be ignored by FormValidation, we need to set <code>excluded: ':disabled'</code>.</p>
+    <p>For more information, see the <a href="/settings#form-excluded">excluded</a> option.</p>
+
+    <p>In order to validate particular region, we can use <a href="/api/#validate-container">validateContainer(container)</a> method.
+        Then use <a href="/api/#is-valid-container">isValidContainer(container)</a> method to determine the container is valid or not.</p>
+
+    <p>Below is the list of examples showing how to use FormValidation with popular wizard plugins:</p>
+    <ul class="doc-list">
+        <li><a href="/examples/bootstrap-wizard/">Bootstrap Wizard</a></li>
+        <li><a href="/examples/fuel-ux-wizard/">Fuel UX Wizard</a></li>
+        <li><a href="/examples/jquery-steps/">jQuery Steps</a></li>
+    </ul>
+</section>
